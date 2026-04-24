@@ -12,14 +12,17 @@
 }
 
 html, body { background: var(--ink); color: #e8e8e8; }
+html { font-size: 17px; }
 body {
   font-family: "VT323", "Share Tech Mono", ui-monospace, monospace;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
 }
 
+/* VT323 reads visually smaller than its metric — boost monos slightly for readability */
+.cs2-mono { font-family: "VT323", "Share Tech Mono", monospace; font-size: 1.06em; }
 .cs2-display { font-family: "Black Ops One", Impact, sans-serif; }
-.cs2-mono { font-family: "VT323", "Share Tech Mono", monospace; }
 
 /* ─── scanlines ─── */
 .cs2-scan::before {

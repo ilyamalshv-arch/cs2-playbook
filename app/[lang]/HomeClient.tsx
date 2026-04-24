@@ -8,13 +8,13 @@ import { FirstVisitGate } from "@/components/FirstVisitGate";
 import { useSynth } from "@/lib/synth";
 
 const ZONES = [
-  { key: "foundations", href: "/foundations", points: "120,120 280,100 310,180 180,220", label: "A SITE",   num: "01" },
-  { key: "mechanics",   href: "/mechanics",   points: "290,180 400,170 410,280 300,290", label: "MID",      num: "02" },
-  { key: "training",    href: "/training",    points: "420,120 560,140 540,240 430,230", label: "T SPAWN",  num: "03" },
-  { key: "tactics",     href: "/tactics",     points: "120,320 280,300 310,420 150,440", label: "B SITE",   num: "04" },
-  { key: "callouts",    href: "/callouts",    points: "300,300 420,290 440,410 320,430", label: "CONNECTOR", num: "05" },
-  { key: "mental",      href: "/mental",      points: "440,260 570,260 560,400 450,420", label: "CT SPAWN",  num: "06" },
-  { key: "history",     href: "/history",     points: "180,460 430,450 450,540 200,550", label: "BOMBSITE", num: "07" },
+  { key: "foundations", href: "/foundations", points: "120,120 280,100 310,180 180,220", label: "FOUNDATIONS",  num: "01" },
+  { key: "mechanics",   href: "/mechanics",   points: "290,180 400,170 410,280 300,290", label: "MECHANICS",    num: "02" },
+  { key: "training",    href: "/training",    points: "420,120 560,140 540,240 430,230", label: "TRAINING",     num: "03" },
+  { key: "tactics",     href: "/tactics",     points: "120,320 280,300 310,420 150,440", label: "TACTICS",      num: "04" },
+  { key: "callouts",    href: "/callouts",    points: "300,300 420,290 440,410 320,430", label: "CALLOUTS",     num: "05" },
+  { key: "mental",      href: "/mental",      points: "440,260 570,260 560,400 450,420", label: "MENTAL",       num: "06" },
+  { key: "history",     href: "/history",     points: "180,460 430,450 450,540 200,550", label: "HISTORY",      num: "07" },
 ];
 
 const centroid = (pts: string): [number, number] => {
@@ -278,8 +278,8 @@ export default function HomeClient({ lang, dict }: { lang: Lang; dict: Dict }) {
                   return (
                     <g key={z.key} onMouseEnter={() => onZoneHover(z.key)} onClick={() => goto(z.key)}>
                       <polygon points={z.points} className={`cs2-zone ${isFocus ? "focused" : ""}`} />
-                      <text x={cx} y={cy - 6} textAnchor="middle" className="cs2-mono pointer-events-none" fill={isHover || isFocus ? "#F5A623" : "#666"} fontSize="11" letterSpacing="2">{z.num}</text>
-                      <text x={cx} y={cy + 10} textAnchor="middle" className="cs2-mono pointer-events-none" fill={isHover || isFocus ? "#fff" : "#888"} fontSize="13" letterSpacing="2">{z.label}</text>
+                      <text x={cx} y={cy - 6} textAnchor="middle" className="cs2-mono pointer-events-none" fill={isHover || isFocus ? "#F5A623" : "#666"} fontSize="10" letterSpacing="2">{z.num}</text>
+                      <text x={cx} y={cy + 10} textAnchor="middle" className="cs2-mono pointer-events-none" fill={isHover || isFocus ? "#fff" : "#888"} fontSize="11" letterSpacing="1.5">{z.label}</text>
                       {isHover && (
                         <circle cx={cx} cy={cy} r="4" fill="#F5A623">
                           <animate attributeName="r" values="4;14;4" dur="1s" repeatCount="indefinite" />

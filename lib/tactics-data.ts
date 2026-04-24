@@ -1,3 +1,34 @@
+export type TacticDiagram = {
+  viewBox: string; // e.g. "0 0 600 400"
+  // map schematic — rendered as background
+  schematic: {
+    // rects for rooms/areas
+    rooms?: { x: number; y: number; w: number; h: number; label?: string; color?: string }[];
+    // lines for walls/chokes
+    walls?: { x1: number; y1: number; x2: number; y2: number }[];
+    // bombsites
+    sites?: { x: number; y: number; r: number; label: "A" | "B" }[];
+  };
+  // animated sequence
+  waypoints: {
+    player: string; // "T1", "T2", "CT1", etc
+    role: "entry" | "support" | "lurker" | "awp" | "igl" | "anchor";
+    path: [number, number][]; // start → ... → end
+    delay?: number; // seconds delay before moving
+  }[];
+  // utility markers that appear by timing
+  utility?: {
+    kind: "smoke" | "flash" | "molly" | "he";
+    x: number;
+    y: number;
+    label?: string;
+    appearAt: number; // seconds into animation
+  }[];
+  // bomb plant position
+  plant?: { x: number; y: number; label: string };
+  totalDuration: number; // seconds for full sequence
+};
+
 export type Tactic = {
   id: string;
   map: string;
@@ -10,6 +41,7 @@ export type Tactic = {
   why: string;
   counterBy: string; // how CT can counter (for T) or how T can counter (for CT)
   proExample?: string;
+  diagram?: TacticDiagram;
 };
 
 export const TACTICS: Tactic[] = [
@@ -32,6 +64,38 @@ export const TACTICS: Tactic[] = [
     why: "Spreads CT attention across two sites. Stairs pressure forces a defender there, opening Palace entry.",
     counterBy: "CT smokes Mid and stacks 3 on A early.",
     proExample: "Classic NAVI / G2 — standard since 2019",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 8,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 120, h: 80, label: "T SPAWN" },
+          { x: 160, y: 40, w: 110, h: 60, label: "PALACE" },
+          { x: 290, y: 40, w: 110, h: 50, label: "A RAMP" },
+          { x: 290, y: 100, w: 110, h: 120, label: "A SITE" },
+          { x: 420, y: 120, w: 120, h: 100, label: "CT" },
+          { x: 160, y: 180, w: 100, h: 60, label: "MID" },
+          { x: 280, y: 260, w: 140, h: 60, label: "JUNGLE" },
+          { x: 20, y: 260, w: 140, h: 60, label: "APPS/STAIRS" },
+          { x: 200, y: 340, w: 280, h: 60, label: "B SITE" },
+        ],
+        sites: [{ x: 345, y: 155, r: 25, label: "A" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1, path: [[80, 60], [215, 70], [320, 90], [345, 140]] },
+        { player: "T2", role: "support", delay: 1.5, path: [[80, 60], [215, 70], [330, 100], [360, 155]] },
+        { player: "T3", role: "support", delay: 1.2, path: [[80, 80], [210, 90], [340, 140], [370, 170]] },
+        { player: "T4", role: "igl",     delay: 1.8, path: [[80, 80], [205, 90], [335, 150], [355, 175]] },
+        { player: "T5", role: "lurker",  delay: 0.5, path: [[60, 90], [90, 290], [200, 280]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 500, y: 145, label: "CT smoke", appearAt: 2.5 },
+        { kind: "smoke", x: 410, y: 80, label: "Stairs",    appearAt: 2.5 },
+        { kind: "flash", x: 230, y: 90, label: "Palace",    appearAt: 3 },
+        { kind: "molly", x: 420, y: 180, label: "Jungle",   appearAt: 2.8 },
+      ],
+      plant: { x: 355, y: 200, label: "DEFAULT" },
+    },
   },
   {
     id: "mir_t_b_rush",
@@ -50,6 +114,36 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Exploits slow CT rotates. Beats any CT that over-commits to A/Mid control.",
     counterBy: "CT full-stacks B with utility thrown into Short.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 6,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 120, h: 80, label: "T SPAWN" },
+          { x: 160, y: 40, w: 150, h: 80, label: "UNDERPASS" },
+          { x: 330, y: 100, w: 100, h: 60, label: "MARKET" },
+          { x: 20, y: 200, w: 130, h: 70, label: "B APPS" },
+          { x: 160, y: 200, w: 170, h: 120, label: "B SITE" },
+          { x: 340, y: 220, w: 120, h: 100, label: "KITCHEN" },
+          { x: 470, y: 160, w: 110, h: 180, label: "CT" },
+        ],
+        sites: [{ x: 240, y: 260, r: 28, label: "B" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 0.5, path: [[80, 60], [80, 230], [190, 260]] },
+        { player: "T2", role: "support", delay: 0.8, path: [[80, 60], [85, 230], [200, 265]] },
+        { player: "T3", role: "support", delay: 1.0, path: [[80, 80], [90, 240], [210, 270]] },
+        { player: "T4", role: "igl",     delay: 1.3, path: [[80, 80], [95, 245], [220, 275]] },
+        { player: "T5", role: "support", delay: 1.5, path: [[80, 90], [100, 250], [230, 280]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 390, y: 130, label: "Market",  appearAt: 1.5 },
+        { kind: "smoke", x: 400, y: 270, label: "Kitchen", appearAt: 1.5 },
+        { kind: "flash", x: 160, y: 230, label: "Apps",    appearAt: 2 },
+        { kind: "molly", x: 430, y: 265, label: "Van",     appearAt: 2.3 },
+      ],
+      plant: { x: 260, y: 280, label: "NINJA" },
+    },
   },
   {
     id: "mir_ct_default",
@@ -68,6 +162,33 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Standard CT balance — every site has info, Mid controlled by AWP, fast rotations via CT cross.",
     counterBy: "T-side should pressure Mid with smokes to disable Window AWP.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 5,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 180, h: 80, label: "A SITE" },
+          { x: 220, y: 20, w: 140, h: 60, label: "TRIPLE" },
+          { x: 380, y: 20, w: 200, h: 80, label: "CT SPAWN" },
+          { x: 20, y: 120, w: 180, h: 100, label: "MID/WINDOW" },
+          { x: 220, y: 120, w: 140, h: 100, label: "SHORT" },
+          { x: 380, y: 120, w: 200, h: 100, label: "JUNGLE" },
+          { x: 20, y: 240, w: 280, h: 100, label: "B APPS" },
+          { x: 320, y: 240, w: 260, h: 100, label: "B SITE/BENCH" },
+        ],
+        sites: [{ x: 100, y: 60, r: 22, label: "A" }, { x: 420, y: 285, r: 22, label: "B" }],
+      },
+      waypoints: [
+        { player: "CT1", role: "anchor", delay: 0, path: [[440, 60], [260, 50]] },
+        { player: "CT2", role: "awp",    delay: 0, path: [[440, 60], [100, 160]] },
+        { player: "CT3", role: "support", delay: 0, path: [[440, 60], [280, 165]] },
+        { player: "CT4", role: "anchor", delay: 0, path: [[460, 70], [460, 280]] },
+        { player: "CT5", role: "igl",    delay: 0, path: [[480, 80], [380, 160]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 100, y: 160, label: "Window late", appearAt: 2.5 },
+      ],
+    },
   },
 
   // ═══ INFERNO ═══
@@ -89,6 +210,37 @@ export const TACTICS: Tactic[] = [
     why: "Banana is Inferno's bomb — whoever wins it controls the game. Utility-heavy executes beat stacked defenders.",
     counterBy: "CT early aggression on Car + Logs smoke from CT side.",
     proExample: "Natus Vincere vs FaZe · Major finals 2021",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 7,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 70, label: "T SPAWN" },
+          { x: 170, y: 20, w: 100, h: 70, label: "BANANA BOT" },
+          { x: 170, y: 110, w: 100, h: 110, label: "BANANA" },
+          { x: 170, y: 240, w: 120, h: 100, label: "CAR/SAND" },
+          { x: 310, y: 200, w: 120, h: 140, label: "B SITE" },
+          { x: 310, y: 60, w: 120, h: 120, label: "LOGS" },
+          { x: 450, y: 60, w: 130, h: 280, label: "CT SPAWN" },
+        ],
+        sites: [{ x: 370, y: 265, r: 28, label: "B" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.5, path: [[85, 50], [220, 60], [230, 270], [360, 280]] },
+        { player: "T2", role: "support", delay: 1.8, path: [[85, 70], [220, 80], [235, 280], [375, 290]] },
+        { player: "T3", role: "awp",     delay: 0.8, path: [[85, 50], [220, 150]] },
+        { player: "T4", role: "support", delay: 2.0, path: [[85, 60], [220, 200], [245, 285], [385, 300]] },
+        { player: "T5", role: "lurker",  delay: 0.5, path: [[60, 80], [150, 280]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 345, y: 135, label: "Coffin",   appearAt: 3 },
+        { kind: "smoke", x: 410, y: 170, label: "NewBox",   appearAt: 3 },
+        { kind: "molly", x: 370, y: 110, label: "Logs",     appearAt: 3.3 },
+        { kind: "molly", x: 225, y: 260, label: "Sand",     appearAt: 2.5 },
+        { kind: "flash", x: 280, y: 180, label: "pop",      appearAt: 4 },
+      ],
+      plant: { x: 370, y: 290, label: "DEFAULT" },
+    },
   },
   {
     id: "inf_t_a_split",
@@ -107,6 +259,36 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Two entry angles destroy CT cross-fires. Hard to execute — timing must be clean.",
     counterBy: "CT smokes Mid early and holds Arch aggressively.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 8,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 130, h: 60, label: "MID" },
+          { x: 320, y: 20, w: 130, h: 60, label: "ARCH" },
+          { x: 170, y: 100, w: 130, h: 120, label: "APARTMENTS" },
+          { x: 320, y: 100, w: 130, h: 120, label: "LIBRARY" },
+          { x: 470, y: 100, w: 110, h: 240, label: "CT" },
+          { x: 170, y: 240, w: 280, h: 100, label: "A SITE" },
+        ],
+        sites: [{ x: 310, y: 290, r: 28, label: "A" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.8, path: [[85, 50], [230, 50], [230, 160], [260, 280]] },
+        { player: "T2", role: "support", delay: 2.0, path: [[85, 60], [230, 60], [230, 170], [275, 290]] },
+        { player: "T3", role: "support", delay: 2.0, path: [[85, 60], [230, 65], [230, 180], [285, 300]] },
+        { player: "T4", role: "awp",     delay: 0.5, path: [[85, 50], [230, 50]] },
+        { player: "T5", role: "entry",   delay: 1.5, path: [[85, 60], [385, 55], [385, 160], [350, 285]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 480, y: 180, label: "CT",       appearAt: 3 },
+        { kind: "smoke", x: 385, y: 235, label: "Library",  appearAt: 3 },
+        { kind: "molly", x: 440, y: 280, label: "Pit",      appearAt: 3.5 },
+        { kind: "flash", x: 350, y: 180, label: "Balcony",  appearAt: 4 },
+      ],
+      plant: { x: 300, y: 310, label: "DEFAULT" },
+    },
   },
   {
     id: "inf_ct_banana_aggro",
@@ -125,6 +307,33 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Forces slow T-side start. Picks a kill or wastes 20 seconds of the round clock.",
     counterBy: "T-side full utility early — T-flash into CT push.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 5,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 150, h: 100, label: "T SPAWN" },
+          { x: 190, y: 20, w: 100, h: 80, label: "BANANA BOT" },
+          { x: 190, y: 120, w: 100, h: 140, label: "BANANA" },
+          { x: 190, y: 280, w: 140, h: 80, label: "B SITE" },
+          { x: 310, y: 110, w: 140, h: 150, label: "TOP BANANA" },
+          { x: 470, y: 20, w: 110, h: 380, label: "CT SPAWN" },
+        ],
+        sites: [{ x: 255, y: 320, r: 24, label: "B" }],
+      },
+      waypoints: [
+        { player: "CT1", role: "awp",     delay: 0.5, path: [[500, 90], [380, 170]] },
+        { player: "CT2", role: "support", delay: 0.8, path: [[500, 100], [340, 200]] },
+        { player: "CT3", role: "anchor",  delay: 0, path: [[500, 320], [300, 320]] },
+        { player: "CT4", role: "igl",     delay: 0, path: [[500, 200], [380, 250]] },
+        { player: "CT5", role: "anchor",  delay: 0, path: [[500, 350], [330, 340]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 240, y: 150, label: "Car",        appearAt: 1.5 },
+        { kind: "molly", x: 215, y: 160, label: "Bathroom",   appearAt: 2 },
+        { kind: "flash", x: 270, y: 180, label: "pop",        appearAt: 1.8 },
+      ],
+    },
   },
 
   // ═══ DUST 2 ═══
@@ -145,6 +354,38 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Mid win cuts CT rotations in half. B split with 5 beats almost any B stack.",
     counterBy: "CT plays B-doors aggressive + Mid AWP with flash support.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 8,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 20, y: 100, w: 130, h: 80, label: "T RAMP" },
+          { x: 20, y: 200, w: 130, h: 140, label: "TUNNELS" },
+          { x: 170, y: 20, w: 100, h: 100, label: "XBOX/MID" },
+          { x: 170, y: 140, w: 150, h: 80, label: "MID DOUBLE" },
+          { x: 170, y: 240, w: 200, h: 100, label: "B SITE" },
+          { x: 290, y: 30, w: 100, h: 110, label: "CAT/SHORT" },
+          { x: 410, y: 30, w: 170, h: 180, label: "A SITE" },
+          { x: 410, y: 230, w: 170, h: 110, label: "CT SPAWN" },
+        ],
+        sites: [{ x: 240, y: 285, r: 26, label: "B" }, { x: 495, y: 120, r: 22, label: "A" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.0, path: [[85, 140], [85, 280], [230, 285]] },
+        { player: "T2", role: "support", delay: 1.3, path: [[85, 140], [85, 290], [245, 295]] },
+        { player: "T3", role: "awp",     delay: 0.5, path: [[85, 50], [220, 80]] },
+        { player: "T4", role: "support", delay: 2.0, path: [[85, 50], [220, 180], [280, 260]] },
+        { player: "T5", role: "lurker",  delay: 3.0, path: [[85, 50], [320, 100], [310, 150]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 215, y: 60, label: "Xbox",    appearAt: 1 },
+        { kind: "smoke", x: 260, y: 180, label: "Double", appearAt: 3 },
+        { kind: "flash", x: 160, y: 250, label: "B door", appearAt: 3.5 },
+        { kind: "molly", x: 220, y: 340, label: "Back",   appearAt: 3.8 },
+      ],
+      plant: { x: 250, y: 305, label: "CAR" },
+    },
   },
   {
     id: "d2_t_long_take",
@@ -163,6 +404,36 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Classic fundamental T-side execute. Works from Silver to Global.",
     counterBy: "CT takes early Pit/Long Doors control with mid-support.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 7,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 150, h: 60, label: "T SPAWN" },
+          { x: 190, y: 20, w: 200, h: 60, label: "LONG DOORS" },
+          { x: 190, y: 100, w: 250, h: 80, label: "LONG" },
+          { x: 410, y: 20, w: 170, h: 120, label: "A SITE" },
+          { x: 460, y: 160, w: 120, h: 100, label: "CT/CROSS" },
+          { x: 310, y: 200, w: 140, h: 100, label: "SHORT" },
+          { x: 20, y: 200, w: 280, h: 140, label: "CATWALK/MID" },
+        ],
+        sites: [{ x: 495, y: 80, r: 28, label: "A" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.8, path: [[95, 50], [300, 50], [440, 140], [485, 85]] },
+        { player: "T2", role: "support", delay: 2.0, path: [[95, 60], [300, 60], [440, 150], [495, 90]] },
+        { player: "T3", role: "awp",     delay: 0.5, path: [[95, 50], [280, 50]] },
+        { player: "T4", role: "support", delay: 2.2, path: [[95, 70], [300, 70], [450, 160], [500, 100]] },
+        { player: "T5", role: "lurker",  delay: 1.0, path: [[95, 80], [160, 220], [260, 240]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 500, y: 170, label: "CT",      appearAt: 2.5 },
+        { kind: "smoke", x: 445, y: 175, label: "Cross",   appearAt: 2.5 },
+        { kind: "molly", x: 430, y: 60, label: "Default",  appearAt: 2.8 },
+        { kind: "flash", x: 380, y: 55, label: "over Doors", appearAt: 3.5 },
+      ],
+      plant: { x: 480, y: 100, label: "DEFAULT" },
+    },
   },
   {
     id: "d2_ct_default",
@@ -181,6 +452,34 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Balanced default. Every site has info, fast rotates via CT/Mid. Standard since 2013.",
     counterBy: "T-side Mid control neutralizes the rotations.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 5,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 200, h: 80, label: "A SITE" },
+          { x: 240, y: 20, w: 120, h: 60, label: "SHORT/CAT" },
+          { x: 380, y: 20, w: 200, h: 80, label: "CT SPAWN" },
+          { x: 20, y: 120, w: 200, h: 100, label: "LONG" },
+          { x: 240, y: 120, w: 120, h: 100, label: "MID" },
+          { x: 380, y: 120, w: 200, h: 100, label: "MID DOUBLE" },
+          { x: 20, y: 240, w: 280, h: 100, label: "TUNNELS" },
+          { x: 320, y: 240, w: 260, h: 100, label: "B SITE" },
+        ],
+        sites: [{ x: 90, y: 60, r: 22, label: "A" }, { x: 420, y: 285, r: 22, label: "B" }],
+      },
+      waypoints: [
+        { player: "CT1", role: "awp",    delay: 0, path: [[440, 60], [100, 170]] },
+        { player: "CT2", role: "support", delay: 0, path: [[440, 70], [300, 160]] },
+        { player: "CT3", role: "igl",    delay: 0, path: [[480, 70], [470, 160]] },
+        { player: "CT4", role: "anchor", delay: 0, path: [[440, 70], [340, 290]] },
+        { player: "CT5", role: "anchor", delay: 0, path: [[460, 75], [400, 280]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 470, y: 200, label: "Upper Tun", appearAt: 2 },
+        { kind: "molly", x: 330, y: 150, label: "Xbox",     appearAt: 2.2 },
+      ],
+    },
   },
 
   // ═══ NUKE ═══
@@ -202,6 +501,37 @@ export const TACTICS: Tactic[] = [
     why: "Bypasses Main choke entirely. Astralis defined this strat 2018-2019.",
     counterBy: "CT early Silo/Outside push round 1 before T spreads.",
     proExample: "Astralis' whole identity was this plus Ramp stomp",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 9,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 100, h: 60, label: "SECRET" },
+          { x: 20, y: 110, w: 200, h: 100, label: "OUTSIDE" },
+          { x: 240, y: 110, w: 100, h: 70, label: "GARAGE" },
+          { x: 360, y: 20, w: 100, h: 80, label: "SILO" },
+          { x: 240, y: 200, w: 200, h: 60, label: "A SITE (upper)" },
+          { x: 240, y: 280, w: 200, h: 60, label: "B SITE (lower)" },
+          { x: 460, y: 40, w: 120, h: 300, label: "CT" },
+        ],
+        sites: [{ x: 340, y: 230, r: 24, label: "A" }, { x: 340, y: 310, r: 20, label: "B" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.5, path: [[85, 50], [80, 160], [300, 170], [320, 225]] },
+        { player: "T2", role: "support", delay: 1.8, path: [[85, 50], [85, 170], [305, 180], [335, 235]] },
+        { player: "T3", role: "awp",     delay: 0.8, path: [[85, 50], [120, 160]] },
+        { player: "T4", role: "support", delay: 2.5, path: [[85, 60], [90, 180], [290, 240], [330, 250]] },
+        { player: "T5", role: "lurker",  delay: 4.0, path: [[85, 60], [220, 50], [300, 50]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 480, y: 180, label: "Heaven", appearAt: 3 },
+        { kind: "smoke", x: 260, y: 140, label: "Hut",    appearAt: 3 },
+        { kind: "molly", x: 380, y: 215, label: "Rafters", appearAt: 3.5 },
+        { kind: "flash", x: 290, y: 195, label: "Silo",   appearAt: 4 },
+      ],
+      plant: { x: 340, y: 250, label: "DEFAULT" },
+    },
   },
   {
     id: "nuke_t_ramp_push",
@@ -220,6 +550,36 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Beats CTs with heavy A-side bias. Forces fast rotate from weakest position.",
     counterBy: "CT Ramp aggression with AWP + support.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 7,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 180, h: 80, label: "MAIN" },
+          { x: 370, y: 20, w: 210, h: 60, label: "OUTSIDE" },
+          { x: 170, y: 120, w: 180, h: 90, label: "T RAMP" },
+          { x: 370, y: 100, w: 210, h: 110, label: "A SITE (upper)" },
+          { x: 170, y: 230, w: 180, h: 110, label: "CONTROL" },
+          { x: 370, y: 230, w: 210, h: 110, label: "B SITE (lower)" },
+        ],
+        sites: [{ x: 470, y: 285, r: 28, label: "B" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.5, path: [[85, 50], [260, 70], [260, 170], [460, 280]] },
+        { player: "T2", role: "support", delay: 1.8, path: [[85, 60], [260, 80], [260, 180], [475, 290]] },
+        { player: "T3", role: "support", delay: 2.0, path: [[85, 70], [260, 85], [265, 190], [485, 300]] },
+        { player: "T4", role: "igl",     delay: 2.2, path: [[85, 70], [260, 90], [265, 195], [495, 305]] },
+        { player: "T5", role: "lurker",  delay: 0.3, path: [[85, 60], [170, 60]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 480, y: 130, label: "Big Door", appearAt: 2.5 },
+        { kind: "molly", x: 260, y: 150, label: "Ramp",     appearAt: 2.3 },
+        { kind: "molly", x: 500, y: 250, label: "Ctrl Rm",  appearAt: 3.8 },
+        { kind: "flash", x: 370, y: 250, label: "entry",    appearAt: 4.2 },
+      ],
+      plant: { x: 475, y: 305, label: "DEFAULT" },
+    },
   },
   {
     id: "nuke_ct_outside_hold",
@@ -238,6 +598,34 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Denies Astralis-style Outside Execute. Forces T to go Main or Ramp.",
     counterBy: "T-side plays slow, clears Secret with utility first.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 5,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 100, h: 60, label: "SECRET" },
+          { x: 20, y: 110, w: 250, h: 100, label: "OUTSIDE" },
+          { x: 290, y: 110, w: 150, h: 70, label: "GARAGE" },
+          { x: 460, y: 20, w: 120, h: 80, label: "SILO" },
+          { x: 290, y: 200, w: 290, h: 140, label: "SITES" },
+          { x: 460, y: 200, w: 120, h: 140, label: "CT" },
+        ],
+        sites: [{ x: 400, y: 260, r: 22, label: "A" }],
+      },
+      waypoints: [
+        { player: "CT1", role: "awp",    delay: 0.5, path: [[500, 220], [380, 180], [320, 145]] },
+        { player: "CT2", role: "support", delay: 1.0, path: [[500, 230], [400, 80]] },
+        { player: "CT3", role: "anchor", delay: 0, path: [[500, 260], [420, 260]] },
+        { player: "CT4", role: "igl",    delay: 0, path: [[500, 270], [400, 270]] },
+        { player: "CT5", role: "anchor", delay: 0, path: [[500, 290], [420, 290]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 220, y: 70, label: "T-Ramp",  appearAt: 1.5 },
+        { kind: "molly", x: 340, y: 155, label: "Garage", appearAt: 1.8 },
+        { kind: "flash", x: 430, y: 65, label: "Silo",    appearAt: 1.3 },
+      ],
+    },
   },
 
   // ═══ ANUBIS ═══
@@ -258,6 +646,37 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Anubis is a Mid-centric map. Owning Mid opens both sites with short walks.",
     counterBy: "CT AWPer plays Heaven or aggressive CT Mid.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 7,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 130, h: 70, label: "ALLEY" },
+          { x: 320, y: 20, w: 130, h: 70, label: "T RAMP" },
+          { x: 20, y: 120, w: 140, h: 160, label: "B CANAL" },
+          { x: 180, y: 120, w: 170, h: 160, label: "MID/BRIDGE" },
+          { x: 370, y: 120, w: 210, h: 160, label: "A MAIN" },
+          { x: 180, y: 300, w: 170, h: 60, label: "CONNECTOR" },
+          { x: 370, y: 300, w: 210, h: 60, label: "A SITE" },
+          { x: 20, y: 300, w: 140, h: 60, label: "B SITE" },
+        ],
+        sites: [{ x: 90, y: 330, r: 20, label: "B" }, { x: 475, y: 330, r: 24, label: "A" }],
+      },
+      waypoints: [
+        { player: "T1", role: "awp",    delay: 0.8, path: [[235, 70], [260, 180]] },
+        { player: "T2", role: "support", delay: 1.5, path: [[235, 80], [260, 200], [270, 280]] },
+        { player: "T3", role: "entry",   delay: 4.0, path: [[235, 90], [260, 250], [470, 320]] },
+        { player: "T4", role: "support", delay: 4.2, path: [[240, 90], [270, 260], [485, 330]] },
+        { player: "T5", role: "lurker",  delay: 0.5, path: [[85, 60], [90, 180], [85, 320]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 350, y: 170, label: "CT Mid", appearAt: 1.5 },
+        { kind: "smoke", x: 250, y: 220, label: "Bridge", appearAt: 2.5 },
+        { kind: "flash", x: 400, y: 290, label: "A entry", appearAt: 4.5 },
+      ],
+      plant: { x: 480, y: 340, label: "DEFAULT" },
+    },
   },
   {
     id: "anu_t_b_canal",
@@ -276,6 +695,36 @@ export const TACTICS: Tactic[] = [
     ],
     why: "The water noise is a feature — CTs know you're coming but can't easily counter.",
     counterBy: "Fast CT rotate with flash over Canal entry.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 7,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 120, h: 60, label: "ALLEY" },
+          { x: 20, y: 100, w: 130, h: 80, label: "B CANAL" },
+          { x: 170, y: 100, w: 150, h: 150, label: "MID/BRIDGE" },
+          { x: 20, y: 200, w: 130, h: 140, label: "B SITE" },
+          { x: 170, y: 270, w: 150, h: 70, label: "PHARMACY" },
+          { x: 340, y: 100, w: 240, h: 240, label: "CT/A" },
+        ],
+        sites: [{ x: 85, y: 270, r: 26, label: "B" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.0, path: [[85, 50], [85, 140], [75, 260]] },
+        { player: "T2", role: "support", delay: 1.4, path: [[85, 60], [85, 150], [85, 270]] },
+        { player: "T3", role: "support", delay: 1.7, path: [[85, 70], [85, 160], [95, 280]] },
+        { player: "T4", role: "igl",     delay: 0.5, path: [[120, 60], [240, 120], [240, 200]] },
+        { player: "T5", role: "awp",     delay: 0.3, path: [[120, 60], [240, 110], [240, 150]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 240, y: 290, label: "Pharmacy", appearAt: 2 },
+        { kind: "smoke", x: 160, y: 220, label: "B Heaven", appearAt: 2 },
+        { kind: "molly", x: 90, y: 220, label: "Truck",     appearAt: 2.3 },
+        { kind: "flash", x: 100, y: 240, label: "entry",    appearAt: 3.5 },
+      ],
+      plant: { x: 90, y: 285, label: "BOXES" },
+    },
   },
   {
     id: "anu_ct_mid_awp",
@@ -293,6 +742,32 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Mid AWP dictates the round. Forces T to commit a site with no Mid info.",
     counterBy: "T flashes Bridge and forces AWP off angle.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 4,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 230, h: 110, label: "T SIDE" },
+          { x: 260, y: 20, w: 320, h: 110, label: "MID / ALLEY" },
+          { x: 20, y: 150, w: 230, h: 110, label: "B SIDE" },
+          { x: 260, y: 150, w: 140, h: 110, label: "CT MID" },
+          { x: 410, y: 150, w: 170, h: 110, label: "CT SPAWN" },
+          { x: 260, y: 280, w: 320, h: 80, label: "A SITE" },
+          { x: 20, y: 280, w: 230, h: 80, label: "B SITE" },
+        ],
+      },
+      waypoints: [
+        { player: "CT1", role: "awp",    delay: 0, path: [[460, 200], [330, 205]] },
+        { player: "CT2", role: "support", delay: 0, path: [[490, 200], [400, 220]] },
+        { player: "CT3", role: "anchor", delay: 0, path: [[500, 300], [420, 310]] },
+        { player: "CT4", role: "anchor", delay: 0, path: [[150, 290], [120, 310]] },
+        { player: "CT5", role: "igl",    delay: 0, path: [[510, 220], [460, 240]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 270, y: 100, label: "Alley (late)", appearAt: 2 },
+        { kind: "flash", x: 340, y: 180, label: "support",     appearAt: 1 },
+      ],
+    },
   },
 
   // ═══ OVERPASS ═══
@@ -313,6 +788,37 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Bathrooms is the infamous boost angle — denying it closes the site. Heaven molly prevents the stall.",
     counterBy: "CT holds Heaven + rotates B-short aggressively.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 7,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 200, h: 60, label: "LONG A" },
+          { x: 20, y: 110, w: 160, h: 80, label: "CONNECTOR" },
+          { x: 20, y: 210, w: 160, h: 70, label: "BANANAS" },
+          { x: 20, y: 300, w: 200, h: 60, label: "B SITE" },
+          { x: 240, y: 210, w: 140, h: 150, label: "HEAVEN" },
+          { x: 240, y: 370, w: 140, h: 30, label: "BATHROOMS" },
+          { x: 400, y: 100, w: 180, h: 300, label: "CT" },
+        ],
+        sites: [{ x: 110, y: 330, r: 26, label: "B" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.5, path: [[85, 50], [85, 150], [85, 245], [110, 330]] },
+        { player: "T2", role: "support", delay: 1.8, path: [[85, 60], [85, 160], [95, 250], [125, 335]] },
+        { player: "T3", role: "support", delay: 2.0, path: [[85, 70], [85, 170], [100, 260], [140, 340]] },
+        { player: "T4", role: "igl",     delay: 2.3, path: [[85, 70], [85, 175], [105, 265], [150, 340]] },
+        { player: "T5", role: "awp",     delay: 0.5, path: [[85, 50], [200, 60], [250, 50]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 290, y: 240, label: "Heaven",     appearAt: 2.5 },
+        { kind: "smoke", x: 290, y: 380, label: "Bathrooms",  appearAt: 2.5 },
+        { kind: "molly", x: 310, y: 260, label: "Heaven plat", appearAt: 2.8 },
+        { kind: "flash", x: 100, y: 230, label: "Bananas",    appearAt: 3.5 },
+      ],
+      plant: { x: 90, y: 340, label: "BANK" },
+    },
   },
   {
     id: "over_t_a_long",
@@ -331,6 +837,36 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Long is Overpass's marathon. Winning it opens two A angles.",
     counterBy: "CT Long AWP + connect rotate with molly.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 8,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 260, h: 100, label: "LONG" },
+          { x: 270, y: 40, w: 60, h: 40, label: "WATER" },
+          { x: 170, y: 140, w: 150, h: 80, label: "PLAYGROUND" },
+          { x: 340, y: 140, w: 120, h: 80, label: "FOUNTAIN" },
+          { x: 450, y: 20, w: 130, h: 200, label: "A SITE" },
+          { x: 170, y: 240, w: 410, h: 100, label: "A SIDE" },
+        ],
+        sites: [{ x: 510, y: 100, r: 28, label: "A" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.5, path: [[85, 50], [230, 70], [380, 80], [500, 95]] },
+        { player: "T2", role: "support", delay: 1.8, path: [[85, 60], [230, 80], [390, 90], [510, 105]] },
+        { player: "T3", role: "awp",     delay: 0.8, path: [[85, 50], [230, 70]] },
+        { player: "T4", role: "support", delay: 3.5, path: [[85, 70], [240, 170], [340, 180], [480, 130]] },
+        { player: "T5", role: "lurker",  delay: 0.5, path: [[85, 80], [240, 180]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 470, y: 70, label: "Truck",    appearAt: 2.5 },
+        { kind: "smoke", x: 390, y: 170, label: "Fountain", appearAt: 4 },
+        { kind: "molly", x: 300, y: 70, label: "Water",    appearAt: 2 },
+        { kind: "flash", x: 200, y: 60, label: "Long",     appearAt: 2.5 },
+      ],
+      plant: { x: 510, y: 115, label: "DEFAULT" },
+    },
   },
   {
     id: "over_ct_b_stack",
@@ -349,6 +885,36 @@ export const TACTICS: Tactic[] = [
     ],
     why: "B rushes are common round 2. A heavy B stack ends pistol force rounds fast.",
     counterBy: "T-side slow default, fake B, go A.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 4,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 200, h: 80, label: "LONG" },
+          { x: 240, y: 20, w: 200, h: 80, label: "PLAY/FOUNT" },
+          { x: 460, y: 20, w: 120, h: 80, label: "A SITE" },
+          { x: 20, y: 120, w: 150, h: 100, label: "CONNECTOR" },
+          { x: 190, y: 120, w: 160, h: 100, label: "BANANAS" },
+          { x: 370, y: 120, w: 210, h: 100, label: "A SIDE" },
+          { x: 20, y: 240, w: 250, h: 100, label: "B SITE" },
+          { x: 290, y: 240, w: 130, h: 100, label: "HEAVEN" },
+          { x: 440, y: 240, w: 140, h: 100, label: "BATHROOMS" },
+        ],
+        sites: [{ x: 140, y: 285, r: 26, label: "B" }],
+      },
+      waypoints: [
+        { player: "CT1", role: "awp",    delay: 0, path: [[350, 290], [350, 290]] },
+        { player: "CT2", role: "anchor", delay: 0, path: [[150, 275], [150, 275]] },
+        { player: "CT3", role: "anchor", delay: 0, path: [[500, 280], [500, 280]] },
+        { player: "CT4", role: "igl",    delay: 0, path: [[500, 170], [380, 170]] },
+        { player: "CT5", role: "support", delay: 0, path: [[500, 70], [490, 70]] },
+      ],
+      utility: [
+        { kind: "molly", x: 270, y: 150, label: "Bananas",   appearAt: 1 },
+        { kind: "smoke", x: 100, y: 170, label: "Connector", appearAt: 2 },
+        { kind: "flash", x: 270, y: 260, label: "B-short",   appearAt: 1.5 },
+      ],
+    },
   },
 
   // ═══ ANCIENT ═══
@@ -369,6 +935,38 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Ancient A has many tight corners — utility clears them all so entry has fewer surprises.",
     counterBy: "CT stacks Donut, plays passive Heaven.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 8,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 130, h: 70, label: "MAIN" },
+          { x: 310, y: 20, w: 120, h: 100, label: "TEMPLE" },
+          { x: 440, y: 20, w: 140, h: 150, label: "A SITE" },
+          { x: 310, y: 140, w: 120, h: 140, label: "DONUT" },
+          { x: 20, y: 140, w: 280, h: 100, label: "MID" },
+          { x: 20, y: 260, w: 160, h: 80, label: "CAVE/B TUN" },
+          { x: 200, y: 260, w: 230, h: 80, label: "B SITE" },
+          { x: 440, y: 190, w: 140, h: 150, label: "CT" },
+        ],
+        sites: [{ x: 510, y: 90, r: 28, label: "A" }, { x: 320, y: 300, r: 22, label: "B" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.5, path: [[85, 50], [235, 60], [370, 70], [500, 90]] },
+        { player: "T2", role: "support", delay: 1.8, path: [[85, 60], [235, 70], [375, 80], [510, 100]] },
+        { player: "T3", role: "support", delay: 2.0, path: [[85, 70], [240, 80], [380, 90], [520, 110]] },
+        { player: "T4", role: "igl",     delay: 2.3, path: [[85, 70], [240, 85], [385, 95], [525, 115]] },
+        { player: "T5", role: "lurker",  delay: 0.5, path: [[60, 80], [120, 190], [200, 180]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 500, y: 45, label: "CT Heaven", appearAt: 3 },
+        { kind: "smoke", x: 365, y: 180, label: "Donut",    appearAt: 3 },
+        { kind: "molly", x: 370, y: 130, label: "Elbow",    appearAt: 3.3 },
+        { kind: "flash", x: 435, y: 100, label: "entry",    appearAt: 4 },
+      ],
+      plant: { x: 515, y: 115, label: "DEFAULT" },
+    },
   },
   {
     id: "anc_t_mid_rush",
@@ -387,6 +985,38 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Tunnels wrap is key — it cuts off B Main rotations and secures post-plant.",
     counterBy: "CT Mid presence with AWP, Tunnels flash denies wrap.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 8,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 130, h: 60, label: "T SPAWN" },
+          { x: 170, y: 20, w: 260, h: 80, label: "MAIN/TEMPLE" },
+          { x: 450, y: 20, w: 130, h: 100, label: "A SITE" },
+          { x: 20, y: 120, w: 410, h: 80, label: "MID" },
+          { x: 20, y: 220, w: 200, h: 70, label: "CAVE" },
+          { x: 240, y: 220, w: 190, h: 70, label: "TUNNELS" },
+          { x: 450, y: 140, w: 130, h: 200, label: "CT" },
+          { x: 20, y: 310, w: 290, h: 50, label: "B SITE" },
+          { x: 330, y: 310, w: 100, h: 50, label: "B MAIN" },
+        ],
+        sites: [{ x: 160, y: 335, r: 24, label: "B" }],
+      },
+      waypoints: [
+        { player: "T1", role: "entry",   delay: 1.5, path: [[85, 50], [85, 260], [150, 330]] },
+        { player: "T2", role: "support", delay: 1.8, path: [[85, 60], [90, 270], [165, 335]] },
+        { player: "T3", role: "support", delay: 2.0, path: [[85, 70], [95, 275], [180, 340]] },
+        { player: "T4", role: "awp",     delay: 0.8, path: [[85, 50], [250, 160]] },
+        { player: "T5", role: "lurker",  delay: 3.0, path: [[85, 80], [340, 255], [380, 325]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 310, y: 160, label: "CT Mid",    appearAt: 1.3 },
+        { kind: "smoke", x: 220, y: 320, label: "B Heaven",  appearAt: 3 },
+        { kind: "molly", x: 320, y: 330, label: "B Main",    appearAt: 3.3 },
+        { kind: "flash", x: 200, y: 310, label: "entry",     appearAt: 4 },
+      ],
+      plant: { x: 170, y: 345, label: "DEFAULT" },
+    },
   },
   {
     id: "anc_ct_default",
@@ -405,6 +1035,34 @@ export const TACTICS: Tactic[] = [
     ],
     why: "Ancient rewards passive CT play — the map has too many angles for aggressive hunts.",
     counterBy: "T-side full utility A execute or Mid force.",
+    diagram: {
+      viewBox: "0 0 600 420",
+      totalDuration: 5,
+      schematic: {
+        rooms: [
+          { x: 20, y: 20, w: 420, h: 80, label: "T SIDE (long lines)" },
+          { x: 450, y: 20, w: 130, h: 110, label: "A SITE" },
+          { x: 20, y: 120, w: 200, h: 80, label: "RAMP/MID" },
+          { x: 230, y: 120, w: 210, h: 80, label: "DONUT / MID" },
+          { x: 450, y: 140, w: 130, h: 200, label: "CT" },
+          { x: 20, y: 220, w: 200, h: 80, label: "TUNNELS" },
+          { x: 230, y: 220, w: 210, h: 80, label: "MAIN B" },
+          { x: 20, y: 320, w: 420, h: 60, label: "B SITE" },
+        ],
+        sites: [{ x: 510, y: 70, r: 22, label: "A" }, { x: 200, y: 345, r: 22, label: "B" }],
+      },
+      waypoints: [
+        { player: "CT1", role: "awp",    delay: 0, path: [[490, 160], [490, 80]] },
+        { player: "CT2", role: "anchor", delay: 0, path: [[490, 170], [330, 160]] },
+        { player: "CT3", role: "igl",    delay: 0, path: [[500, 180], [380, 190]] },
+        { player: "CT4", role: "anchor", delay: 0, path: [[500, 280], [340, 340]] },
+        { player: "CT5", role: "support", delay: 0, path: [[510, 320], [290, 345]] },
+      ],
+      utility: [
+        { kind: "smoke", x: 140, y: 160, label: "Ramp",   appearAt: 2 },
+        { kind: "molly", x: 150, y: 260, label: "Cave",   appearAt: 2.3 },
+      ],
+    },
   },
 ];
 

@@ -4,6 +4,7 @@ import { Swords, Shield, ChevronDown } from "lucide-react";
 import type { Dict, Lang } from "@/lib/i18n";
 import { HudBar } from "@/components/HudBar";
 import { TACTICS, MAP_ORDER, type Tactic } from "@/lib/tactics-data";
+import TacticDiagramPlayer from "@/components/TacticDiagramPlayer";
 
 type Side = "all" | "t" | "ct";
 type MapFilter = "all" | typeof MAP_ORDER[number];
@@ -201,6 +202,10 @@ function TacticCard({ tactic, expanded, onToggle }: { tactic: Tactic; expanded: 
               <div className="cs2-mono text-[10px] tracking-[0.4em] mb-1 text-[#666]">▸ PRO REFERENCE</div>
               <div className="cs2-mono text-xs italic text-[#ccc]">&laquo; {tactic.proExample} &raquo;</div>
             </div>
+          )}
+
+          {tactic.diagram && (
+            <TacticDiagramPlayer diagram={tactic.diagram} side={tactic.side} />
           )}
         </div>
       )}

@@ -301,10 +301,10 @@ function SpraySection() {
     <div className="cs2-fadeup grid lg:grid-cols-[1fr_1.1fr] gap-6">
       <div>
         <div className="cs2-mono text-[10px] tracking-[0.4em] mb-3 text-[#F5A623]">▸ SELECT WEAPON</div>
-        <div className="grid grid-cols-2 gap-2 mb-4">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
           {SPRAY_PATTERNS.map((w) => (
             <button key={w.id} onClick={() => setWeaponId(w.id)}
-              className="cs2-mono text-sm tracking-widest py-3 transition-all"
+              className="cs2-mono text-xs tracking-widest py-2.5 transition-all"
               style={{
                 background: weaponId === w.id ? w.color : "transparent",
                 color: weaponId === w.id ? "#fff" : "#888",
@@ -527,11 +527,28 @@ function AudioSection() {
     { surface: "Grass/Dirt", loudness: 65, note: "Muffled. Dust 2 Long, Ancient cave approaches." },
   ];
   const RELOAD = [
-    { weapon: "AK-47",   time: "2.43s", mag: 30, note: "Never reload in the open mid-fight. Take cover." },
-    { weapon: "M4A4",    time: "3.10s", mag: 30, note: "Longer than AK. Count your bullets." },
-    { weapon: "M4A1-S",  time: "3.10s", mag: 20, note: "Smaller mag. 20 bullets goes fast in a spray." },
-    { weapon: "AWP",     time: "3.70s", mag: 10, note: "A full reload takes forever. Reload one at a time if safe." },
-    { weapon: "Desert Eagle", time: "2.20s", mag: 7, note: "Pistol rounds: 7 shots = 7 kills or rebuy." },
+    { weapon: "AK-47",         time: "2.43s", mag: 30, note: "Never reload in the open mid-fight. Take cover." },
+    { weapon: "M4A4",          time: "3.10s", mag: 30, note: "Longer than AK. Count your bullets." },
+    { weapon: "M4A1-S",        time: "3.10s", mag: 20, note: "Smaller mag. 20 bullets goes fast in a spray." },
+    { weapon: "FAMAS",         time: "3.26s", mag: 25, note: "CT force-buy rifle. Reload safely." },
+    { weapon: "Galil AR",      time: "2.80s", mag: 35, note: "T force-buy. 35 bullets is a lot — ration them." },
+    { weapon: "AUG",           time: "3.80s", mag: 30, note: "Long reload, but scope gives you time to reposition." },
+    { weapon: "SG 553",        time: "3.00s", mag: 30, note: "Scope + one-shot potential. Worth the reload." },
+    { weapon: "AWP",           time: "3.70s", mag: 10, note: "A full reload takes forever. Reload one at a time if safe." },
+    { weapon: "SSG 08",        time: "2.50s", mag: 10, note: "Scout — lighter, quicker reload. Crouched shots accurate." },
+    { weapon: "MP9",           time: "2.10s", mag: 30, note: "Fastest SMG reload. Anti-eco go-to." },
+    { weapon: "MAC-10",        time: "2.40s", mag: 30, note: "T-side rush weapon. Don't spray more than you need." },
+    { weapon: "UMP-45",        time: "3.50s", mag: 25, note: "High damage SMG. Reload behind cover — it's slow." },
+    { weapon: "P90",           time: "3.30s", mag: 50, note: "50 bullets means you rarely reload mid-round." },
+    { weapon: "Desert Eagle",  time: "2.20s", mag: 7, note: "Pistol rounds: 7 shots = 7 kills or rebuy." },
+    { weapon: "USP-S / P2000", time: "2.20s", mag: 12, note: "Default CT pistol. Headshot-only to be efficient." },
+    { weapon: "Glock-18",      time: "2.20s", mag: 20, note: "T pistol. Burst mode (right click) for close range." },
+    { weapon: "P250",          time: "2.20s", mag: 13, note: "Eco pistol. One-hit headshot with armor at close range." },
+    { weapon: "Five-SeveN",    time: "2.70s", mag: 20, note: "CT anti-eco pistol. Pierces armor better than others." },
+    { weapon: "Tec-9",         time: "2.00s", mag: 18, note: "T anti-eco pistol. Run-and-gun friendly." },
+    { weapon: "CZ75-Auto",     time: "2.90s", mag: 12, note: "Pocket SMG. Full-auto for 12 rounds. Close range terror." },
+    { weapon: "Nova",          time: "3.50s", mag: 8, note: "Pump shotgun — reload is per-shell, stop when safe." },
+    { weapon: "XM1014",        time: "4.00s", mag: 7, note: "Auto shotgun — longest reload. Not for open fights." },
   ];
 
   return (
@@ -558,8 +575,8 @@ function AudioSection() {
       </div>
 
       <div>
-        <div className="cs2-mono text-[10px] tracking-[0.4em] mb-3 text-[#F5A623]">▸ RELOAD TIMINGS</div>
-        <div style={{ background: "#060606", border: "1px solid #1a1a1a" }}>
+        <div className="cs2-mono text-[10px] tracking-[0.4em] mb-3 text-[#F5A623]">▸ RELOAD TIMINGS · {RELOAD.length} WEAPONS</div>
+        <div style={{ background: "#060606", border: "1px solid #1a1a1a", maxHeight: 560, overflowY: "auto" }}>
           {RELOAD.map((r) => (
             <div key={r.weapon} className="p-4 border-b border-[#1a1a1a] last:border-b-0">
               <div className="flex items-baseline justify-between mb-2">

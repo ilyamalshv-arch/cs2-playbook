@@ -38,6 +38,10 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "Un proyecto universitario de dos chicos se convierte en el shooter competitivo definitorio de su era. El mod priorizó la coordinación del equipo sobre la habilidad individual, el ritmo por rondas sobre el caos del respawn, y la economía sobre el conteo de kills. Cada shooter táctico posterior — Valorant, Rainbow Six, Rush — tiene esta DNA.",
     },
     tags: ["1.0", "mod", "half-life"],
+    links: [
+      { label: "CS 1.0 launch trailer (YouTube)", url: "https://www.youtube.com/watch?v=nTmIzu5kGBc" },
+      { label: "The Minh Le interview", url: "https://www.youtube.com/watch?v=FnWzYyJPnTo" },
+    ],
   },
   {
     id: "cpl_2001",
@@ -61,6 +65,10 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "La Cyberathlete Professional League organizó el primer evento internacional de CS. HeatoN, SpawN y los suecos demostraron que el CS no era un hobby sino un deporte — con tácticas, estrategias y carreras.",
     },
     tags: ["CPL", "HeatoN", "SpawN"],
+    links: [
+      { label: "HLTV · CPL history", url: "https://www.hltv.org/news/9823/the-history-of-counter-strike-cpl" },
+      { label: "Classic NoA gameplay (YouTube)", url: "https://www.youtube.com/watch?v=ZxgrmIxNX3g" },
+    ],
   },
   {
     id: "sk_heaton",
@@ -84,6 +92,10 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "Con aim perfecto y un cerebro de IGL que leía rondas tres adelante, HeatoN fue la primera superestrella global del CS. El estilo de NiP — holds disciplinados en Nuke, ejecuciones T estructuradas — definió cómo se jugaba por años.",
     },
     tags: ["NiP", "Sweden", "HeatoN"],
+    links: [
+      { label: "HeatoN HLTV profile", url: "https://www.hltv.org/player/75/heaton" },
+      { label: "HeatoN highlights (YouTube)", url: "https://www.youtube.com/watch?v=NCz4WpkCJ_8" },
+    ],
   },
   {
     id: "css_release",
@@ -130,6 +142,10 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "f0rest no era solo el mejor aimer del mundo — él puso el molde. El estilo lurker de GeT_RiGhT, el IGLing de cArn y la rotación de talento sueco hicieron a fnatic temido en cada LAN.",
     },
     tags: ["fnatic", "f0rest", "sweden"],
+    links: [
+      { label: "f0rest best plays (YouTube)", url: "https://www.youtube.com/watch?v=kQK0f3cvVN4" },
+      { label: "fnatic history · HLTV", url: "https://www.hltv.org/team/4991/fnatic" },
+    ],
   },
   {
     id: "cs_go_release",
@@ -154,6 +170,9 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "Agosto 2012 — el juego que todos esperaban que fracasara sale con reseñas mixtas. Movimiento estilo consola, spray patterns raros, playerbase chica. Pero Valve itera. Para 2013 las armas se sienten bien. Para 2014 los equipos pro cambian. Para 2015 CS:GO es más grande de lo que el 1.6 fue jamás.",
     },
     tags: ["csgo", "valve", "launch"],
+    links: [
+      { label: "CS:GO launch trailer", url: "https://www.youtube.com/watch?v=edYCtaNueQY" },
+    ],
   },
   {
     id: "nip_87_0",
@@ -256,6 +275,11 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "Cuatro Majors (Atlanta 2017, Londres 2018, Katowice 2019, Berlín 2019). Trabajo con coach mental. Warmups estructurados. Ejecuciones utility-heavy que convirtieron las granadas en un idioma. Profesionalizaron el CS de una forma que todo equipo top aún copia. Cuando escuchás 'Astralis Nuke' — es el mapa como debe jugarse.",
     },
     tags: ["Astralis", "Denmark", "4 Majors", "zonic"],
+    links: [
+      { label: "Astralis · 4 Major run recap (YouTube)", url: "https://www.youtube.com/watch?v=W3ABR9_XDW8" },
+      { label: "zonic interview · the coach method", url: "https://www.youtube.com/watch?v=JrXkMxH1v-U" },
+      { label: "Berlin 2019 Grand Final HLTV", url: "https://www.hltv.org/events/4655/starladder-major-berlin-2019" },
+    ],
   },
   {
     id: "astralis_nuke",
@@ -279,6 +303,10 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "De febrero 2018 a mayo 2019, Astralis no perdió un solo juego de Nuke en LAN. Convirtieron el mapa en ciencia: control de Outside con utility perfecta, stomp de Ramp en T-side, anchor holds wallbangeando toda posición T. El mapa era tan malo para los rivales que muchos lo vetaban primero contra Astralis y perdían igual.",
     },
     tags: ["Astralis", "Nuke", "31-0"],
+    links: [
+      { label: "The Astralis Nuke masterclass (YouTube)", url: "https://www.youtube.com/watch?v=fL_pbw9o9yQ" },
+      { label: "HLTV · streak ends vs ENCE", url: "https://www.hltv.org/news/27305/ence-end-astralis-nuke-streak" },
+    ],
   },
   {
     id: "s1mple_peak",
@@ -303,6 +331,11 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "s1mple de NAVI termina 2018 con un rating HLTV de 1.32 — el rating anual más alto registrado. Cuatro MVPs. El jugador #1 del mundo por HLTV. Sus jugadas de lurker, sus ángulos de AWP, sus retakes de B en Dust 2 — una clase magistral de un jugador ganando 1v4 que debían ser imposibles.",
     },
     tags: ["s1mple", "NAVI", "1.32", "MVP"],
+    links: [
+      { label: "s1mple 2018 best of year (YouTube)", url: "https://www.youtube.com/watch?v=v2HLHcnJzXc" },
+      { label: "HLTV · s1mple player of the year", url: "https://www.hltv.org/news/25900/s1mple-top-20-players-of-2018-number-1" },
+      { label: "s1mple profile · HLTV", url: "https://www.hltv.org/player/7998/s1mple" },
+    ],
   },
   {
     id: "cs2_launch",
@@ -327,6 +360,10 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "Tras un año de beta cerrada, Valve reemplaza CS:GO por completo el 27 de septiembre de 2023. Los cambios principales: humos volumétricos que se pueden peekear, flashear, explotar; actualizaciones sub-tick que prometen que cada bala cuenta; reconstrucción en motor Source 2. La escena pro se adapta en meses. La memoria muscular para humos se reescribe.",
     },
     tags: ["cs2", "source 2", "volumetric smoke"],
+    links: [
+      { label: "CS2 official launch video (YouTube)", url: "https://www.youtube.com/watch?v=P9K_q_t9SrM" },
+      { label: "CS2 official page · Valve", url: "https://www.counter-strike.net/cs2" },
+    ],
   },
   {
     id: "donk_era",
@@ -351,6 +388,10 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "Danil 'donk' Kryshkovets — nacido en 2007, entró a Team Spirit en 2023, MVP del Shanghai Major 2024 a los 17. Su rifling es de otro mundo: flicks wallbang, spray de AK a distancia, entry frags que parecen scripteados. Es lo que NiKo fue para 2018, lo que s1mple fue para 2019 — la vara del skill mecánico en la nueva era.",
     },
     tags: ["donk", "Team Spirit", "Shanghai Major", "2024"],
+    links: [
+      { label: "donk Shanghai Major MVP (YouTube)", url: "https://www.youtube.com/watch?v=hKPY7nt4LQk" },
+      { label: "donk HLTV profile", url: "https://www.hltv.org/player/24719/donk" },
+    ],
   },
   {
     id: "vitality_2025",
@@ -374,6 +415,10 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "Con ZywOo en su pico y un roster retrabajado, Vitality se lleva tres Majors — un eco de la dinastía Astralis. La pregunta para 2026: ¿alguien puede detenerlos? Spirit con donk, NAVI con reconstrucciones, Falcons con estrellas internacionales — la caza está en marcha.",
     },
     tags: ["Vitality", "ZywOo", "Budapest 2025"],
+    links: [
+      { label: "ZywOo highlights (YouTube)", url: "https://www.youtube.com/watch?v=d5f0F5Hj7mI" },
+      { label: "Team Vitality · HLTV", url: "https://www.hltv.org/team/9565/vitality" },
+    ],
   },
   {
     id: "now",

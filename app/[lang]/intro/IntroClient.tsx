@@ -108,6 +108,12 @@ export default function IntroClient({ lang, dict }: { lang: Lang; dict: Dict }) 
         .cs2-zoomeye { animation: zoom-eye 1.4s ease-in both; transform-origin: 50% 42%; }
         @keyframes particle { 0%{transform:translate(0,0) scale(1);opacity:1;} 100%{transform:translate(var(--tx), var(--ty)) scale(0.2);opacity:0;} }
         .cs2-particle { animation: particle 1.2s ease-out forwards; }
+        @keyframes keyfly {
+          0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 1; }
+          15% { opacity: 1; }
+          100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) rotate(var(--rot)) scale(0.6); opacity: 0; }
+        }
+        .cs2-keyfly { animation: keyfly 1.6s cubic-bezier(.3,.1,.2,1) forwards; position: absolute; }
         @keyframes logo-glitch { 0%{clip-path:inset(0 0 100% 0);opacity:0;transform:translateX(-20px);} 30%{clip-path:inset(0 0 0 0);opacity:1;transform:translateX(2px);} 35%{transform:translateX(-3px);} 40%{transform:translateX(1px);} 100%{clip-path:inset(0 0 0 0);opacity:1;transform:translateX(0);} }
         .cs2-logo-in { animation: logo-glitch 1s steps(12,end) both; }
         @keyframes logo-subtle { from{opacity:0;letter-spacing:1em;} to{opacity:1;letter-spacing:0.3em;} }
@@ -227,19 +233,40 @@ export default function IntroClient({ lang, dict }: { lang: Lang; dict: Dict }) 
               <line x1="80" y1="100" x2="120" y2="100" stroke="#F5A623" strokeWidth="1.5" />
             </svg>
           </div>
-          {Array.from({ length: 24 }).map((_, i) => {
-            const angle = (i / 24) * Math.PI * 2;
-            const dist = 300 + Math.random() * 250;
+          {/* broken keyboard — keys fly out */}
+          {[
+            "W","A","S","D","Q","E","R","F","G","B","M","TAB","SHIFT","CTRL","SPACE","ESC","1","2","3","4","5",
+            "←","↑","→","↓","ALT","~","ENTER"
+          ].map((k, i) => {
+            const angle = (i / 27) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
+            const dist = 320 + Math.random() * 300;
             const tx = Math.cos(angle) * dist;
             const ty = Math.sin(angle) * dist;
+            const rot = (Math.random() - 0.5) * 720;
+            const size = k.length > 2 ? 24 : 18;
             return (
-              <div key={i} className="absolute cs2-particle" style={{
-                width: 6 + Math.random() * 8, height: 6 + Math.random() * 8,
-                background: ["#F5A623", "#D0021B", "#2ECC71", "#fff"][i % 4],
-                left: "50%", top: "50%",
-                ["--tx" as any]: `${tx}px`, ["--ty" as any]: `${ty}px`,
-                animationDelay: `${0.3 + i * 0.02}s`,
-              }} />
+              <div key={i} className="absolute cs2-keyfly"
+                style={{
+                  left: "50%", top: "50%",
+                  ["--tx" as any]: `${tx}px`,
+                  ["--ty" as any]: `${ty}px`,
+                  ["--rot" as any]: `${rot}deg`,
+                  animationDelay: `${0.2 + i * 0.015}s`,
+                  width: size + 10, height: size + 4,
+                  background: ["#1a1a1a", "#2a2a2a", "#222"][i % 3],
+                  border: "1.5px solid #555",
+                  borderRadius: 2,
+                  color: "#ccc",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: k.length > 2 ? 8 : 11,
+                  fontFamily: "'VT323', monospace",
+                  fontWeight: "bold",
+                  letterSpacing: 0.5,
+                  boxShadow: "inset 0 -2px 0 rgba(0,0,0,0.4), 0 0 4px rgba(0,0,0,0.6)",
+                  willChange: "transform, opacity",
+                }}>
+                {k}
+              </div>
             );
           })}
         </div>
@@ -343,43 +370,70 @@ function SceneSVG({ phase, coach, green }: { phase: Phase; coach: string; green:
           )}
           <text x="145" y="305" textAnchor="middle" fill="#999" fontSize="10" fontFamily="VT323, monospace" letterSpacing="2">{coach}</text>
         </g>
-        {/* GREEN */}
+        {/* GREEN — classic CT SEAL skin (the meme player named Green, not actually green) */}
         <g transform={whisper ? "translate(0 0) scale(1.1)" : soft ? "translate(-30 0)" : "translate(0 0)"}>
-          <path d="M 420 190 L 400 280 L 450 280 L 455 230 L 480 230 L 485 280 L 530 280 L 510 190 Z" fill="#2ECC71" stroke="#fff" strokeWidth="3" strokeLinejoin="round" />
-          <rect x="455" y="176" width="20" height="18" fill="#f0c9a4" stroke="#fff" strokeWidth="3" />
-          <circle cx="465" cy="148" r="32" fill="#f0c9a4" stroke="#fff" strokeWidth="3" />
-          <path d="M 436 128 Q 445 108 465 120 Q 485 108 494 128 Q 490 120 465 116 Q 440 120 436 128 Z" fill="#6b4423" stroke="#fff" strokeWidth="2" />
+          {/* body — dark tactical uniform */}
+          <path d="M 420 190 L 400 280 L 450 280 L 455 230 L 480 230 L 485 280 L 530 280 L 510 190 Z" fill="#1e252e" stroke="#fff" strokeWidth="3" strokeLinejoin="round" />
+          {/* tactical vest — black with mag pouches */}
+          <rect x="427" y="200" width="76" height="60" fill="#0a0a0a" stroke="#fff" strokeWidth="2.5" />
+          {/* magazine pouches on vest */}
+          <rect x="433" y="210" width="14" height="18" fill="#2a2a2a" stroke="#fff" strokeWidth="1.5" />
+          <rect x="450" y="210" width="14" height="18" fill="#2a2a2a" stroke="#fff" strokeWidth="1.5" />
+          <rect x="467" y="210" width="14" height="18" fill="#2a2a2a" stroke="#fff" strokeWidth="1.5" />
+          <rect x="484" y="210" width="14" height="18" fill="#2a2a2a" stroke="#fff" strokeWidth="1.5" />
+          {/* radio pouch */}
+          <rect x="433" y="234" width="16" height="20" fill="#2a2a2a" stroke="#fff" strokeWidth="1.5" />
+          <circle cx="441" cy="240" r="2" fill="#2ECC71" />
+          {/* knife sheath */}
+          <rect x="484" y="238" width="6" height="18" fill="#1a1a1a" stroke="#fff" strokeWidth="1.2" />
+          {/* neck */}
+          <rect x="455" y="172" width="20" height="20" fill="#1a1f24" stroke="#fff" strokeWidth="3" />
+          {/* head — dark balaclava */}
+          <circle cx="465" cy="148" r="32" fill="#0e0e0e" stroke="#fff" strokeWidth="3" />
+          {/* helmet — dark tactical */}
+          <path d="M 434 140 Q 437 108 465 108 Q 493 108 496 140 L 496 148 Q 465 126 434 148 Z" fill="#262f38" stroke="#fff" strokeWidth="2.5" />
+          {/* helmet strap */}
+          <path d="M 440 160 Q 465 168 490 160" stroke="#fff" strokeWidth="1.5" fill="none" opacity="0.4" />
+          {/* eyes window in balaclava — horizontal slit */}
+          <path d="M 443 140 Q 465 136 487 140 L 487 156 Q 465 160 443 156 Z" fill="#f0c9a4" stroke="#fff" strokeWidth="1.5" />
+          {/* eyes */}
           {yelling ? (
             <>
               <circle cx="455" cy="148" r="5" fill="#fff" stroke="#000" strokeWidth="1.5" />
               <circle cx="475" cy="148" r="5" fill="#fff" stroke="#000" strokeWidth="1.5" />
               <circle cx="455" cy="149" r="2" fill="#000" />
               <circle cx="475" cy="149" r="2" fill="#000" />
-              <path d="M 490 135 Q 488 142 492 146 Q 496 142 494 135 Z" fill="#5dade2" stroke="#fff" strokeWidth="1.5" />
             </>
           ) : (
             <>
-              <path d="M 450 152 Q 455 148 460 152" fill="none" stroke="#000" strokeWidth="2.5" />
-              <path d="M 470 152 Q 475 148 480 152" fill="none" stroke="#000" strokeWidth="2.5" />
+              <path d="M 450 150 Q 455 147 460 150" fill="none" stroke="#000" strokeWidth="2.5" />
+              <path d="M 470 150 Q 475 147 480 150" fill="none" stroke="#000" strokeWidth="2.5" />
             </>
           )}
-          <line x1="446" y1="138" x2="460" y2="142" stroke="#000" strokeWidth="2.5" />
-          <line x1="484" y1="138" x2="470" y2="142" stroke="#000" strokeWidth="2.5" />
-          {whisper ? <path d="M 455 165 Q 465 163 475 165" fill="none" stroke="#000" strokeWidth="2.5" />
-            : soft ? <path d="M 455 165 Q 465 168 475 165" fill="none" stroke="#000" strokeWidth="2.5" />
-            : <line x1="457" y1="165" x2="473" y2="165" stroke="#000" strokeWidth="2.5" />}
+          {/* eyebrows — visible through slit */}
+          <line x1="447" y1="140" x2="461" y2="144" stroke="#000" strokeWidth="2.2" />
+          <line x1="483" y1="140" x2="469" y2="144" stroke="#000" strokeWidth="2.2" />
+          {/* tactical goggles / NVG lens on helmet side */}
+          <circle cx="496" cy="134" r="4" fill="#2a9d2a" stroke="#fff" strokeWidth="1.5" opacity="0.8" />
+          {/* arms in gloves */}
           <path d="M 420 200 L 410 265" stroke="#fff" strokeWidth="3" fill="none" />
-          <circle cx="408" cy="267" r="8" fill="#f0c9a4" stroke="#fff" strokeWidth="2" />
+          <rect x="402" y="260" width="14" height="16" fill="#0a0a0a" stroke="#fff" strokeWidth="1.8" />
           <path d="M 510 200 L 525 265" stroke="#fff" strokeWidth="3" fill="none" />
-          <circle cx="527" cy="267" r="8" fill="#f0c9a4" stroke="#fff" strokeWidth="2" />
+          <rect x="519" y="260" width="14" height="16" fill="#0a0a0a" stroke="#fff" strokeWidth="1.8" />
+          {/* smashed keyboard on yell phase */}
           {yelling && (
-            <g transform="translate(380 260) rotate(-15)">
-              <rect x="0" y="0" width="40" height="8" fill="#4a2c12" stroke="#fff" strokeWidth="1.5" />
-              <rect x="10" y="-6" width="20" height="6" fill="#2a2a2a" stroke="#fff" strokeWidth="1.5" />
-              <rect x="40" y="-2" width="18" height="12" fill="#2a2a2a" stroke="#fff" strokeWidth="1.5" />
+            <g transform="translate(370 260) rotate(-12)">
+              <rect x="0" y="0" width="48" height="10" fill="#1a1a1a" stroke="#fff" strokeWidth="1.5" />
+              {/* broken keys scattered */}
+              <rect x="4" y="2" width="5" height="5" fill="#333" stroke="#555" strokeWidth="0.5" />
+              <rect x="11" y="2" width="5" height="5" fill="#333" stroke="#555" strokeWidth="0.5" />
+              <rect x="18" y="2" width="5" height="5" fill="#333" stroke="#555" strokeWidth="0.5" />
+              <rect x="28" y="-8" width="7" height="6" fill="#2a2a2a" stroke="#555" strokeWidth="0.5" transform="rotate(-20 28 -8)" />
+              <rect x="42" y="-4" width="18" height="10" fill="#2a2a2a" stroke="#fff" strokeWidth="1.5" />
+              <rect x="-10" y="-6" width="6" height="6" fill="#333" stroke="#555" strokeWidth="0.5" transform="rotate(25 -10 -6)" />
             </g>
           )}
-          <text x="465" y="305" textAnchor="middle" fill="#2ECC71" fontSize="10" fontFamily="VT323, monospace" letterSpacing="2">{green}</text>
+          <text x="465" y="305" textAnchor="middle" fill="#F5A623" fontSize="10" fontFamily="VT323, monospace" letterSpacing="2">{green}</text>
         </g>
         {yelling && (
           <g>

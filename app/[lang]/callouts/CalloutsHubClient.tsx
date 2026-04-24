@@ -155,6 +155,18 @@ export default function CalloutsHubClient({ lang, dict }: { lang: Lang; dict: Di
           <div className="cs2-mono text-sm leading-relaxed max-w-2xl text-[#888]">
             All seven Active Duty maps are live with full trilingual callouts and Headshot Challenge quizzes. 150+ zones across the pool. Mirage, Inferno, Dust 2, Nuke, Anubis, Overpass, Ancient — each with its own hand-drawn schematic and regional callout variants.
           </div>
+
+          <div className="mt-10 p-5 border-l-4" style={{ borderColor: "#F5A623", background: "rgba(245,166,35,0.03)" }}>
+            <div className="cs2-mono text-[10px] tracking-[0.4em] mb-2 text-[#F5A623]">▸ PRO TIP</div>
+            <div className="cs2-mono text-sm leading-relaxed text-[#ddd] mb-3">
+              The default in-game radar is about as accurate as a jumping USP. <span className="text-[#F5A623]">Simple Radar</span> is a free, FACEIT-approved radar pack that redraws every map with precise outlines and callout labels. VAC-safe, used by pros and over a million players.
+            </div>
+            <a href="https://readtldr.gg/simpleradar" target="_blank" rel="noopener noreferrer"
+              className="inline-block cs2-mono text-xs tracking-widest px-4 py-2 transition-all hover:scale-105"
+              style={{ background: "#F5A623", color: "#0a0a0a" }}>
+              GET SIMPLE RADAR ↗
+            </a>
+          </div>
         </div>
       </section>
 
