@@ -229,9 +229,16 @@ export default function HomeClient({ lang, dict }: { lang: Lang; dict: Dict }) {
           <p className="cs2-reveal max-w-xl mt-10 cs2-mono text-lg sm:text-xl leading-relaxed text-[#bbb]" style={{ animationDelay: "0.55s" }}>
             {t.hero_desc}
           </p>
-          <div className="cs2-reveal mt-12 flex items-center gap-3" style={{ animationDelay: "0.7s" }}>
-            <div className="cs2-mono text-xs tracking-widest text-[#F5A623]">{t.hero_cta}</div>
-            <div className="cs2-arrow-bounce text-[#F5A623]">▾</div>
+          <div className="cs2-reveal mt-12 flex flex-wrap items-center gap-4" style={{ animationDelay: "0.7s" }}>
+            <div className="flex items-center gap-3">
+              <div className="cs2-mono text-xs tracking-widest text-[#F5A623]">{t.hero_cta}</div>
+              <div className="cs2-arrow-bounce text-[#F5A623]">▾</div>
+            </div>
+            <Link href={`/${lang}/intro`}
+              className="cs2-mono text-xs tracking-widest px-4 py-2 transition-all hover:scale-105 flex items-center gap-2"
+              style={{ border: "1px solid #F5A623", color: "#F5A623" }}>
+              ▸ WATCH INTRO
+            </Link>
           </div>
           <div className="cs2-reveal cs2-mono text-xs mt-2 text-[#555]" style={{ animationDelay: "0.8s" }}>{t.hero_hint}</div>
 

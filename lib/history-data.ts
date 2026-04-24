@@ -39,8 +39,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["1.0", "mod", "half-life"],
     links: [
-      { label: "CS 1.0 launch trailer (YouTube)", url: "https://www.youtube.com/watch?v=nTmIzu5kGBc" },
-      { label: "The Minh Le interview", url: "https://www.youtube.com/watch?v=FnWzYyJPnTo" },
+      { label: "CS history · YouTube search", url: "https://www.youtube.com/results?search_query=Counter-Strike+1.0+history+documentary" },
+      { label: "Minh Le · Wikipedia", url: "https://en.wikipedia.org/wiki/Minh_Le" },
     ],
   },
   {
@@ -66,8 +66,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["CPL", "HeatoN", "SpawN"],
     links: [
-      { label: "HLTV · CPL history", url: "https://www.hltv.org/news/9823/the-history-of-counter-strike-cpl" },
-      { label: "Classic NoA gameplay (YouTube)", url: "https://www.youtube.com/watch?v=ZxgrmIxNX3g" },
+      { label: "CPL · Wikipedia", url: "https://en.wikipedia.org/wiki/Cyberathlete_Professional_League" },
+      { label: "NoA classic · YouTube search", url: "https://www.youtube.com/results?search_query=Team+NoA+counter-strike+2001" },
     ],
   },
   {
@@ -93,8 +93,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["NiP", "Sweden", "HeatoN"],
     links: [
-      { label: "HeatoN HLTV profile", url: "https://www.hltv.org/player/75/heaton" },
-      { label: "HeatoN highlights (YouTube)", url: "https://www.youtube.com/watch?v=NCz4WpkCJ_8" },
+      { label: "HeatoN · Wikipedia", url: "https://en.wikipedia.org/wiki/HeatoN" },
+      { label: "HeatoN plays · YouTube search", url: "https://www.youtube.com/results?search_query=HeatoN+counter-strike+highlights" },
     ],
   },
   {
@@ -143,8 +143,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["fnatic", "f0rest", "sweden"],
     links: [
-      { label: "f0rest best plays (YouTube)", url: "https://www.youtube.com/watch?v=kQK0f3cvVN4" },
-      { label: "fnatic history · HLTV", url: "https://www.hltv.org/team/4991/fnatic" },
+      { label: "f0rest plays · YouTube search", url: "https://www.youtube.com/results?search_query=f0rest+best+plays+CS" },
+      { label: "fnatic · HLTV", url: "https://www.hltv.org/team/4991/fnatic" },
     ],
   },
   {
@@ -171,7 +171,7 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["csgo", "valve", "launch"],
     links: [
-      { label: "CS:GO launch trailer", url: "https://www.youtube.com/watch?v=edYCtaNueQY" },
+      { label: "CS:GO launch · YouTube search", url: "https://www.youtube.com/results?search_query=CS+GO+launch+trailer+2012" },
     ],
   },
   {
@@ -197,7 +197,7 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "GeT_RiGhT, f0rest, Xizt, Fifflaren, friberg — el lineup original sueco de CS:GO. Desde el lanzamiento del juego hasta 2013, no perdieron un solo mapa en LAN durante 87 mapas seguidos. En cualquier era, en cualquier esport — este récord permanecerá.",
     },
     tags: ["NiP", "87-0", "record"],
-    links: [{ label: "HLTV coverage", url: "https://www.hltv.org/news/9728/ninjas-in-pyjamas-reach-87-0" }],
+    links: [{ label: "HLTV · 2013 archive", url: "https://www.hltv.org/news/archive/2013/1" }],
   },
   {
     id: "olofboost",
@@ -222,7 +222,7 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
       es: "En los cuartos contra LDLC, olofmeister de fnatic es boosteado sobre una repisa arriba de los baños del B en Overpass — un spot fuera de la geometría del nivel. Llueven headshots desde una posición que el enemigo no puede ver. LDLC protesta. La revancha se cancela. CS:GO introduce reglas sobre 'map exploits'. El término 'boost' entra al vocabulario. Overpass nunca es el mismo.",
     },
     tags: ["fnatic", "olofmeister", "overpass", "exploit"],
-    links: [{ label: "HLTV history", url: "https://www.hltv.org/news/14310/fnatic-forfeits-replay" }],
+    links: [{ label: "olofboost · YouTube search", url: "https://www.youtube.com/results?search_query=olofboost+overpass+fnatic+LDLC" }],
   },
   {
     id: "coldzera_awp",
@@ -248,8 +248,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["coldzera", "Luminosity", "SK", "AWP", "Columbus"],
     links: [
-      { label: "The clip (YouTube)", url: "https://www.youtube.com/watch?v=6eQNrr0ApBc" },
-      { label: "HLTV POTY", url: "https://www.hltv.org/news/17566/play-of-the-year-2016" },
+      { label: "coldzera 4K · YouTube search", url: "https://www.youtube.com/results?search_query=coldzera+jumping+awp+mirage+columbus" },
+      { label: "HLTV · 2016 archive", url: "https://www.hltv.org/news/archive/2016/1" },
     ],
   },
   {
@@ -276,9 +276,9 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["Astralis", "Denmark", "4 Majors", "zonic"],
     links: [
-      { label: "Astralis · 4 Major run recap (YouTube)", url: "https://www.youtube.com/watch?v=W3ABR9_XDW8" },
-      { label: "zonic interview · the coach method", url: "https://www.youtube.com/watch?v=JrXkMxH1v-U" },
-      { label: "Berlin 2019 Grand Final HLTV", url: "https://www.hltv.org/events/4655/starladder-major-berlin-2019" },
+      { label: "Astralis era · YouTube search", url: "https://www.youtube.com/results?search_query=Astralis+4+major+era+highlights" },
+      { label: "zonic interview · YouTube search", url: "https://www.youtube.com/results?search_query=zonic+astralis+coach+interview" },
+      { label: "Berlin 2019 · HLTV", url: "https://www.hltv.org/events/4655/starladder-major-berlin-2019" },
     ],
   },
   {
@@ -304,8 +304,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["Astralis", "Nuke", "31-0"],
     links: [
-      { label: "The Astralis Nuke masterclass (YouTube)", url: "https://www.youtube.com/watch?v=fL_pbw9o9yQ" },
-      { label: "HLTV · streak ends vs ENCE", url: "https://www.hltv.org/news/27305/ence-end-astralis-nuke-streak" },
+      { label: "Astralis Nuke · YouTube search", url: "https://www.youtube.com/results?search_query=Astralis+Nuke+masterclass" },
+      { label: "ENCE ends streak · YouTube search", url: "https://www.youtube.com/results?search_query=ENCE+vs+Astralis+nuke+streak+ends" },
     ],
   },
   {
@@ -332,9 +332,9 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["s1mple", "NAVI", "1.32", "MVP"],
     links: [
-      { label: "s1mple 2018 best of year (YouTube)", url: "https://www.youtube.com/watch?v=v2HLHcnJzXc" },
-      { label: "HLTV · s1mple player of the year", url: "https://www.hltv.org/news/25900/s1mple-top-20-players-of-2018-number-1" },
-      { label: "s1mple profile · HLTV", url: "https://www.hltv.org/player/7998/s1mple" },
+      { label: "s1mple 2018 · YouTube search", url: "https://www.youtube.com/results?search_query=s1mple+best+of+2018+highlights" },
+      { label: "s1mple · Wikipedia", url: "https://en.wikipedia.org/wiki/S1mple" },
+      { label: "s1mple · HLTV", url: "https://www.hltv.org/player/7998/s1mple" },
     ],
   },
   {
@@ -361,8 +361,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["cs2", "source 2", "volumetric smoke"],
     links: [
-      { label: "CS2 official launch video (YouTube)", url: "https://www.youtube.com/watch?v=P9K_q_t9SrM" },
-      { label: "CS2 official page · Valve", url: "https://www.counter-strike.net/cs2" },
+      { label: "CS2 launch · YouTube search", url: "https://www.youtube.com/results?search_query=Counter-Strike+2+launch+trailer" },
+      { label: "CS2 · counter-strike.net", url: "https://www.counter-strike.net/cs2" },
     ],
   },
   {
@@ -389,8 +389,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["donk", "Team Spirit", "Shanghai Major", "2024"],
     links: [
-      { label: "donk Shanghai Major MVP (YouTube)", url: "https://www.youtube.com/watch?v=hKPY7nt4LQk" },
-      { label: "donk HLTV profile", url: "https://www.hltv.org/player/24719/donk" },
+      { label: "donk MVP · YouTube search", url: "https://www.youtube.com/results?search_query=donk+Shanghai+Major+MVP+2024" },
+      { label: "donk · HLTV", url: "https://www.hltv.org/player/24719/donk" },
     ],
   },
   {
@@ -416,8 +416,8 @@ export const HISTORY_EVENTS: HistoryEvent[] = [
     },
     tags: ["Vitality", "ZywOo", "Budapest 2025"],
     links: [
-      { label: "ZywOo highlights (YouTube)", url: "https://www.youtube.com/watch?v=d5f0F5Hj7mI" },
-      { label: "Team Vitality · HLTV", url: "https://www.hltv.org/team/9565/vitality" },
+      { label: "ZywOo · YouTube search", url: "https://www.youtube.com/results?search_query=ZywOo+Vitality+highlights" },
+      { label: "Vitality · HLTV", url: "https://www.hltv.org/team/9565/vitality" },
     ],
   },
   {
