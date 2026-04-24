@@ -56,10 +56,10 @@ export default function HistoryClient({ lang, dict }: { lang: Lang; dict: Dict }
       />
 
       {/* HEADER */}
-      <section className="relative pt-24 pb-8 px-6 sm:px-10">
+      <section className="relative pt-24 pb-8 px-4 sm:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-reveal cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">// 07 · BOMBSITE · TIMELINE</div>
-          <h1 className="cs2-display mt-2 text-5xl sm:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
+          <h1 className="cs2-display mt-2 text-4xl sm:text-5xl md:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
             25 YEARS <span className="text-[#F5A623]">OF CS</span>
           </h1>
           <p className="cs2-reveal cs2-mono text-base sm:text-lg max-w-2xl mt-4 text-[#aaa]" style={{ animationDelay: "0.15s" }}>
@@ -69,7 +69,7 @@ export default function HistoryClient({ lang, dict }: { lang: Lang; dict: Dict }
       </section>
 
       {/* DECADE MINIMAP */}
-      <section className="px-6 sm:px-10 mb-6">
+      <section className="px-4 sm:px-10 mb-6">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-mono text-[10px] tracking-[0.4em] mb-3 text-[#666]">▸ TIMELINE · 1999 → 2026</div>
           <div className="relative h-20" style={{ background: "#060606", border: "1px solid #1a1a1a" }}>
@@ -143,7 +143,7 @@ export default function HistoryClient({ lang, dict }: { lang: Lang; dict: Dict }
       </section>
 
       {/* FILTERS */}
-      <section className="px-6 sm:px-10 mb-10">
+      <section className="px-4 sm:px-10 mb-10">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center gap-2">
           <div className="cs2-mono text-[10px] tracking-[0.4em] mr-2 text-[#666]">▸ FILTER</div>
           <FilterPill label="ALL" active={filter === "all"} onClick={() => setFilter("all")} color="#F5A623" />
@@ -161,7 +161,7 @@ export default function HistoryClient({ lang, dict }: { lang: Lang; dict: Dict }
       </section>
 
       {/* TIMELINE */}
-      <section className="px-6 sm:px-10 pb-20">
+      <section className="px-4 sm:px-10 pb-20">
         <div className="max-w-6xl mx-auto relative">
           {/* vertical spine */}
           <div className="absolute left-[140px] sm:left-[180px] top-0 bottom-0 w-px bg-[#1a1a1a] hidden md:block" />
@@ -236,7 +236,7 @@ export default function HistoryClient({ lang, dict }: { lang: Lang; dict: Dict }
                               {e.links.map((link) => (
                                 <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer"
                                   onClick={(ev) => ev.stopPropagation()}
-                                  className="cs2-mono text-xs tracking-widest px-3 py-1.5 hover:scale-105 transition-transform"
+                                  className="cs2-mono text-xs tracking-widest px-3 py-2 hover:scale-105 transition-transform"
                                   style={{ border: `1px solid ${cat.color}`, color: cat.color }}>
                                   {link.label} ↗
                                 </a>
@@ -268,7 +268,7 @@ export default function HistoryClient({ lang, dict }: { lang: Lang; dict: Dict }
         </div>
       </section>
 
-      <footer className="border-t border-[#1a1a1a] px-6 sm:px-10 py-8">
+      <footer className="border-t border-[#1a1a1a] px-4 sm:px-10 py-8">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 cs2-mono text-xs text-[#555]">
           <div>{dict.site_name} · HISTORY · 1999 → 2026</div>
           <div>legends · moments · tactics</div>
@@ -284,7 +284,7 @@ const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "
 function FilterPill({ label, active, onClick, color, small }: { label: string; active: boolean; onClick: () => void; color: string; small?: boolean }) {
   return (
     <button onClick={onClick}
-      className={`cs2-mono tracking-widest transition-all ${small ? "text-[9px] px-2 py-1" : "text-[10px] px-3 py-1.5"}`}
+      className={`cs2-mono tracking-widest transition-all ${small ? "text-[9px] px-2 py-1" : "text-[10px] px-3 py-2"}`}
       style={{
         background: active ? color : "transparent",
         color: active ? "#0a0a0a" : color,

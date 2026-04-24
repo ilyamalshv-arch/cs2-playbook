@@ -232,7 +232,7 @@ export default function TacticDiagramPlayer({ diagram, side }: { diagram: Tactic
         </svg>
 
         {/* controls */}
-        <div className="mt-3 flex items-center gap-3">
+        <div className="mt-3 flex flex-wrap items-center gap-2 sm:gap-3">
           <button onClick={playing ? pause : play}
             className="cs2-mono text-xs tracking-widest px-4 py-2 flex items-center gap-2 transition-all hover:scale-105"
             style={{ background: sideColor, color: side === "t" ? "#fff" : "#0a0a0a" }}>
@@ -243,7 +243,7 @@ export default function TacticDiagramPlayer({ diagram, side }: { diagram: Tactic
             style={{ border: "1px solid #333" }}>
             <RotateCcw size={11} /> RESET
           </button>
-          <div className="flex-1 h-1 bg-[#1a1a1a] rounded">
+          <div className="flex-1 min-w-[80px] h-1 bg-[#1a1a1a] rounded">
             <div className="h-full rounded transition-none" style={{ width: `${progress * 100}%`, background: sideColor }} />
           </div>
         </div>

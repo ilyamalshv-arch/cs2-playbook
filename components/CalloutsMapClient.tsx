@@ -188,7 +188,7 @@ export default function CalloutsMapClient({
         dict={{ back: dict.back, audio_on: dict.audio_on, audio_off: dict.audio_off, site_name: dict.site_name, hud_version: dict.hud_version }}
       />
 
-      <section className="relative pt-24 pb-8 px-6 sm:px-10">
+      <section className="relative pt-24 pb-8 px-4 sm:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">{mapTag}</div>
           <h1 className="cs2-display mt-2 text-5xl sm:text-6xl text-white" style={{ letterSpacing: "0.01em" }}>
@@ -214,7 +214,7 @@ export default function CalloutsMapClient({
       </section>
 
       {mode === "quiz" && currentTarget && !quiz.feedback && (
-        <section className="px-6 sm:px-10 mb-6">
+        <section className="px-4 sm:px-10 mb-6">
           <div className="max-w-6xl mx-auto">
             <div className="relative" style={{ background: "#060606", border: "1px solid #D0021B", padding: "20px 24px" }}>
               <div className="flex items-start justify-between flex-wrap gap-4">
@@ -244,7 +244,7 @@ export default function CalloutsMapClient({
       )}
 
       {mode === "quiz" && quiz.feedback && (
-        <section className="px-6 sm:px-10 mb-6">
+        <section className="px-4 sm:px-10 mb-6">
           <div className="max-w-6xl mx-auto">
             <div className={`cs2-popin relative ${quiz.feedback === "miss" || quiz.feedback === "timeout" ? "cs2-missshake" : ""}`}
               style={{ background: quiz.feedback === "hit" ? "rgba(245,166,35,0.1)" : "rgba(208,2,27,0.1)", border: `2px solid ${quiz.feedback === "hit" ? "#F5A623" : "#D0021B"}`, padding: 24 }}>
@@ -260,11 +260,11 @@ export default function CalloutsMapClient({
       )}
 
       {mode === "results" && (
-        <section className="px-6 sm:px-10 pb-20">
+        <section className="px-4 sm:px-10 pb-20">
           <div className="max-w-4xl mx-auto">
             <div className="cs2-popin relative" style={{ background: "#060606", border: "1px solid #F5A623", padding: "40px 32px" }}>
               <div className="cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">▸ {t.results_title}</div>
-              <div className="cs2-display text-5xl sm:text-7xl mt-2 text-white">
+              <div className="cs2-display text-4xl sm:text-5xl md:text-7xl mt-2 text-white">
                 {quiz.correct} <span className="text-[#555]">/</span> {QUIZ_ROUNDS}
               </div>
               <div className="cs2-mono text-lg mt-2 text-[#aaa]">
@@ -287,8 +287,8 @@ export default function CalloutsMapClient({
       )}
 
       {mode !== "results" && (
-        <section className="px-6 sm:px-10 pb-20">
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_320px] gap-8 items-start">
+        <section className="px-4 sm:px-10 pb-20">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_320px] gap-5 lg:gap-8 items-start">
             <div className="relative">
               <div className="cs2-mono text-xs tracking-[0.3em] mb-3 text-[#555]">▸ DE_{mapName.toUpperCase()} · OVERHEAD</div>
               <div className="relative" style={{ background: "#060606", border: "1px solid #1a1a1a", padding: 12 }}>
@@ -457,7 +457,7 @@ export default function CalloutsMapClient({
                       onClick={() => { if (mode === "explore") { setFocusId(c.id); setHoverId(c.id); } }}
                       onMouseEnter={() => setHoverId(c.id)}
                       onMouseLeave={() => setHoverId(null)}
-                      className="w-full text-left px-3 py-1.5 cs2-mono text-sm hover:bg-[#111] flex justify-between items-center transition-colors"
+                      className="w-full text-left px-3 py-2 cs2-mono text-sm hover:bg-[#111] flex justify-between items-center transition-colors"
                       style={{ color: focusId === c.id ? "#F5A623" : hoverId === c.id ? "#fff" : "#888", background: focusId === c.id ? "rgba(245,166,35,0.06)" : "transparent" }}>
                       <span>{c.en}</span>
                       <span className="text-[10px] text-[#444]">{lang === "ru" ? c.ru : lang === "es" ? c.es : c.ru}</span>
@@ -482,7 +482,7 @@ export default function CalloutsMapClient({
         </section>
       )}
 
-      <footer className="border-t border-[#1a1a1a] px-6 sm:px-10 py-8">
+      <footer className="border-t border-[#1a1a1a] px-4 sm:px-10 py-8">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 cs2-mono text-xs text-[#555]">
           <div>{dict.site_name} · CALLOUTS · {mapLabel}</div>
           <div>next up: <span className="text-[#F5A623]">{nextUp}</span></div>

@@ -158,7 +158,7 @@ export default function IntroClient({ lang, dict }: { lang: Lang; dict: Dict }) 
       {phase === "press" && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-10 cursor-pointer">
           <div className="cs2-mono text-[10px] tracking-[0.5em] text-[#666]">{t.insert_coin}</div>
-          <div className="cs2-display text-5xl sm:text-7xl cs2-blink" style={{ color: "#F5A623", letterSpacing: "0.05em" }}>{t.press}</div>
+          <div className="cs2-display text-4xl sm:text-5xl md:text-7xl cs2-blink" style={{ color: "#F5A623", letterSpacing: "0.05em" }}>{t.press}</div>
           <div className="cs2-mono text-lg text-[#888]">{t.press_sub}</div>
           <div className="mt-8 flex flex-wrap justify-center gap-3 cs2-mono text-xs px-4 text-center text-[#444]">
             {t.tips.map((tip, i) => <span key={i}>{tip}</span>)}
@@ -277,7 +277,7 @@ export default function IntroClient({ lang, dict }: { lang: Lang; dict: Dict }) 
           <div className="cs2-flash" />
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
             <div className="cs2-logo-in cs2-display text-6xl sm:text-8xl md:text-9xl text-white" style={{ letterSpacing: "0.03em" }}>CS2</div>
-            <div className="cs2-logo-in cs2-display text-5xl sm:text-7xl md:text-8xl" style={{ color: "#F5A623", letterSpacing: "0.03em", animationDelay: "0.2s" }}>PLAYBOOK</div>
+            <div className="cs2-logo-in cs2-display text-4xl sm:text-5xl md:text-7xl md:text-8xl" style={{ color: "#F5A623", letterSpacing: "0.03em", animationDelay: "0.2s" }}>PLAYBOOK</div>
             <div className="cs2-logo-sub cs2-mono text-sm sm:text-base mt-6 text-[#888]">{t.logo_sub}</div>
           </div>
         </>
@@ -285,7 +285,7 @@ export default function IntroClient({ lang, dict }: { lang: Lang; dict: Dict }) 
 
       {phase === "done" && (
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
-          <div className="cs2-fadeup cs2-display text-5xl sm:text-7xl md:text-8xl mb-2 text-white">CS2</div>
+          <div className="cs2-fadeup cs2-display text-4xl sm:text-5xl md:text-7xl md:text-8xl mb-2 text-white">CS2</div>
           <div className="cs2-fadeup cs2-display text-4xl sm:text-6xl md:text-7xl" style={{ color: "#F5A623", animationDelay: "0.1s" }}>PLAYBOOK</div>
           <div className="cs2-fadeup cs2-mono text-sm sm:text-base mt-3 mb-10 text-[#888]" style={{ animationDelay: "0.2s" }}>{t.subtitle}</div>
 

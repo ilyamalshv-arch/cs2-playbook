@@ -37,10 +37,10 @@ export default function TacticsClient({ lang, dict }: { lang: Lang; dict: Dict }
         dict={{ back: dict.back, audio_on: dict.audio_on, audio_off: dict.audio_off, site_name: dict.site_name, hud_version: dict.hud_version }}
       />
 
-      <section className="pt-24 pb-8 px-6 sm:px-10">
+      <section className="pt-24 pb-8 px-4 sm:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-reveal cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">// 04 · B SITE · TACTICS</div>
-          <h1 className="cs2-display mt-2 text-5xl sm:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
+          <h1 className="cs2-display mt-2 text-4xl sm:text-5xl md:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
             THE <span className="text-[#F5A623]">PLAYBOOK</span>
           </h1>
           <p className="cs2-reveal cs2-mono text-base sm:text-lg max-w-2xl mt-4 text-[#aaa]" style={{ animationDelay: "0.15s" }}>
@@ -50,26 +50,26 @@ export default function TacticsClient({ lang, dict }: { lang: Lang; dict: Dict }
       </section>
 
       {/* FILTERS */}
-      <section className="px-6 sm:px-10 mb-6">
+      <section className="px-4 sm:px-10 mb-6">
         <div className="max-w-6xl mx-auto space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <div className="cs2-mono text-[10px] tracking-[0.4em] mr-2 text-[#666]">▸ SIDE</div>
             <button onClick={() => setSide("all")}
-              className="cs2-mono text-xs tracking-widest px-3 py-1.5 transition-all"
+              className="cs2-mono text-xs tracking-widest px-3 py-2 transition-all"
               style={{
                 background: side === "all" ? "#F5A623" : "transparent",
                 color: side === "all" ? "#0a0a0a" : "#888",
                 border: `1px solid ${side === "all" ? "#F5A623" : "#333"}`,
               }}>ALL</button>
             <button onClick={() => setSide("t")}
-              className="cs2-mono text-xs tracking-widest px-3 py-1.5 transition-all flex items-center gap-2"
+              className="cs2-mono text-xs tracking-widest px-3 py-2 transition-all flex items-center gap-2"
               style={{
                 background: side === "t" ? "#D0021B" : "transparent",
                 color: side === "t" ? "#fff" : "#D0021B",
                 border: `1px solid #D0021B`,
               }}><Swords size={11} /> T-SIDE</button>
             <button onClick={() => setSide("ct")}
-              className="cs2-mono text-xs tracking-widest px-3 py-1.5 transition-all flex items-center gap-2"
+              className="cs2-mono text-xs tracking-widest px-3 py-2 transition-all flex items-center gap-2"
               style={{
                 background: side === "ct" ? "#5dade2" : "transparent",
                 color: side === "ct" ? "#0a0a0a" : "#5dade2",
@@ -79,7 +79,7 @@ export default function TacticsClient({ lang, dict }: { lang: Lang; dict: Dict }
           <div className="flex flex-wrap items-center gap-2">
             <div className="cs2-mono text-[10px] tracking-[0.4em] mr-2 text-[#666]">▸ MAP</div>
             <button onClick={() => setMapFilter("all")}
-              className="cs2-mono text-[10px] tracking-widest px-3 py-1.5 transition-all"
+              className="cs2-mono text-[10px] tracking-widest px-3 py-2 transition-all"
               style={{
                 background: mapFilter === "all" ? "#F5A623" : "transparent",
                 color: mapFilter === "all" ? "#0a0a0a" : "#888",
@@ -87,7 +87,7 @@ export default function TacticsClient({ lang, dict }: { lang: Lang; dict: Dict }
               }}>ALL MAPS</button>
             {MAP_ORDER.map((m) => (
               <button key={m} onClick={() => setMapFilter(m)}
-                className="cs2-mono text-[10px] tracking-widest px-3 py-1.5 transition-all"
+                className="cs2-mono text-[10px] tracking-widest px-3 py-2 transition-all"
                 style={{
                   background: mapFilter === m ? "#F5A623" : "transparent",
                   color: mapFilter === m ? "#0a0a0a" : "#888",
@@ -102,7 +102,7 @@ export default function TacticsClient({ lang, dict }: { lang: Lang; dict: Dict }
       </section>
 
       {/* TACTICS GRID */}
-      <section className="px-6 sm:px-10 pb-20">
+      <section className="px-4 sm:px-10 pb-20">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-3">
           {filtered.map((t) => (
             <TacticCard key={t.id} tactic={t} expanded={expandedId === t.id} onToggle={() => setExpandedId(expandedId === t.id ? null : t.id)} />
@@ -116,7 +116,7 @@ export default function TacticsClient({ lang, dict }: { lang: Lang; dict: Dict }
         </div>
       </section>
 
-      <footer className="border-t border-[#1a1a1a] px-6 sm:px-10 py-8">
+      <footer className="border-t border-[#1a1a1a] px-4 sm:px-10 py-8">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 cs2-mono text-xs text-[#555]">
           <div>{dict.site_name} · TACTICS · 21 EXECUTES</div>
           <div>steal shamelessly · win consistently</div>

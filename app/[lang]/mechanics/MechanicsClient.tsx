@@ -20,10 +20,10 @@ export default function MechanicsClient({ lang, dict }: { lang: Lang; dict: Dict
         dict={{ back: dict.back, audio_on: dict.audio_on, audio_off: dict.audio_off, site_name: dict.site_name, hud_version: dict.hud_version }}
       />
 
-      <section className="pt-24 pb-8 px-6 sm:px-10">
+      <section className="pt-24 pb-8 px-4 sm:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-reveal cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">// 02 · MID · MECHANICS</div>
-          <h1 className="cs2-display mt-2 text-5xl sm:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
+          <h1 className="cs2-display mt-2 text-4xl sm:text-5xl md:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
             THE <span className="text-[#F5A623]">FUNDAMENTALS</span>
           </h1>
           <p className="cs2-reveal cs2-mono text-base sm:text-lg max-w-2xl mt-4 text-[#aaa]" style={{ animationDelay: "0.15s" }}>
@@ -32,7 +32,7 @@ export default function MechanicsClient({ lang, dict }: { lang: Lang; dict: Dict
         </div>
       </section>
 
-      <section className="px-6 sm:px-10 mb-6">
+      <section className="px-4 sm:px-10 mb-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-wrap gap-2">
             {([
@@ -56,7 +56,7 @@ export default function MechanicsClient({ lang, dict }: { lang: Lang; dict: Dict
         </div>
       </section>
 
-      <section className="px-6 sm:px-10 pb-20">
+      <section className="px-4 sm:px-10 pb-20">
         <div className="max-w-6xl mx-auto">
           {section === "crosshair" && <CrosshairSection />}
           {section === "peek" && <PeekSection />}
@@ -66,7 +66,7 @@ export default function MechanicsClient({ lang, dict }: { lang: Lang; dict: Dict
         </div>
       </section>
 
-      <footer className="border-t border-[#1a1a1a] px-6 sm:px-10 py-8">
+      <footer className="border-t border-[#1a1a1a] px-4 sm:px-10 py-8">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 cs2-mono text-xs text-[#555]">
           <div>{dict.site_name} · MECHANICS</div>
           <div>fundamentals · drilled daily</div>

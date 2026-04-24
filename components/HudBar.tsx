@@ -38,23 +38,23 @@ export function HudBar({
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 flex items-center justify-between px-5 py-3 text-xs tracking-widest z-[100] cs2-mono border-b border-[#1a1a1a]"
+      className="fixed top-0 left-0 right-0 flex items-center justify-between px-3 sm:px-5 py-3 text-xs tracking-widest z-[100] cs2-mono border-b border-[#1a1a1a]"
       style={{ background: "rgba(10,10,10,0.85)", backdropFilter: "blur(8px)" }}
     >
-      <div className="flex items-center gap-3 text-[#8a8a8a]">
+      <div className="flex items-center gap-2 sm:gap-3 text-[#8a8a8a] min-w-0">
         {backHref && (
-          <Link href={backHref} className="flex items-center gap-1 hover:text-white transition-colors">
+          <Link href={backHref} className="flex items-center gap-1 hover:text-white transition-colors flex-shrink-0">
             <ChevronLeft size={12} />
-            <span>{dict.back}</span>
+            <span className="hidden sm:inline">{dict.back}</span>
           </Link>
         )}
-        {backHref && <span className="text-[#333]">/</span>}
-        <Crosshair size={14} style={{ color: "#F5A623" }} />
-        <span>{dict.site_name}</span>
+        {backHref && <span className="text-[#333] hidden sm:inline">/</span>}
+        <Crosshair size={14} style={{ color: "#F5A623" }} className="flex-shrink-0" />
+        <span className="hidden sm:inline">{dict.site_name}</span>
         {title && (
           <>
-            <span className="text-[#444]">·</span>
-            <span>{title}</span>
+            <span className="text-[#444] hidden sm:inline">·</span>
+            <span className="truncate">{title}</span>
           </>
         )}
         {subtitle && (
@@ -64,7 +64,7 @@ export function HudBar({
           </>
         )}
       </div>
-      <div className="flex items-center gap-4 text-[#8a8a8a]">
+      <div className="flex items-center gap-3 sm:gap-4 text-[#8a8a8a] flex-shrink-0">
         {extras}
         <button onClick={cycleLang} className="flex items-center gap-1 hover:text-white transition-colors uppercase">
           <Globe size={14} />
@@ -72,7 +72,7 @@ export function HudBar({
         </button>
         <button onClick={onMute} className="flex items-center gap-1 hover:text-white transition-colors">
           {muted ? <VolumeX size={14} /> : <Volume2 size={14} />}
-          <span className="hidden sm:inline">{muted ? dict.audio_off : dict.audio_on}</span>
+          <span className="hidden md:inline">{muted ? dict.audio_off : dict.audio_on}</span>
         </button>
       </div>
     </div>

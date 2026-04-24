@@ -215,7 +215,7 @@ export default function HomeClient({ lang, dict }: { lang: Lang; dict: Dict }) {
       </div>
 
       {/* HERO */}
-      <section className="relative pt-40 sm:pt-48 pb-20 px-6 sm:px-10 overflow-hidden">
+      <section className="relative pt-40 sm:pt-48 pb-20 px-4 sm:px-10 overflow-hidden">
         <div className="absolute inset-0 cs2-grid opacity-40 pointer-events-none" />
         <div className="relative max-w-6xl mx-auto">
           <div className="cs2-reveal cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">{t.hero_eyebrow}</div>
@@ -252,11 +252,12 @@ export default function HomeClient({ lang, dict }: { lang: Lang; dict: Dict }) {
       </section>
 
       {/* RADAR */}
-      <section className="relative px-6 sm:px-10 pb-20">
+      <section className="relative px-4 sm:px-10 pb-20">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_320px] gap-10 items-start">
           <div className="relative">
             <div className="cs2-mono text-xs tracking-[0.3em] mb-3 text-[#555]">▸ RADAR · DE_PLAYBOOK</div>
-            <div className="relative" style={{ background: "#060606", border: "1px solid #1a1a1a", padding: 16 }}>
+            <div className="relative" style={{ background: "#060606", border: "1px solid #1a1a1a" }}>
+              <div className="p-2 sm:p-4">
               <svg viewBox="0 0 600 600" className="w-full h-auto" onMouseLeave={() => setHoverZone(null)}>
                 {Array.from({ length: 13 }).map((_, i) => (
                   <g key={i}>
@@ -316,6 +317,7 @@ export default function HomeClient({ lang, dict }: { lang: Lang; dict: Dict }) {
                 </span>
                 <span>SCALE 1:150</span>
               </div>
+              </div>
             </div>
           </div>
 
@@ -371,7 +373,7 @@ export default function HomeClient({ lang, dict }: { lang: Lang; dict: Dict }) {
       </section>
 
       {/* CARDS */}
-      <section className="relative px-6 sm:px-10 pb-24">
+      <section className="relative px-4 sm:px-10 pb-24">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-end justify-between mb-8 flex-wrap gap-3">
             <div>
@@ -411,7 +413,7 @@ export default function HomeClient({ lang, dict }: { lang: Lang; dict: Dict }) {
         </div>
       </section>
 
-      <footer className="border-t border-[#1a1a1a] px-6 sm:px-10 py-12">
+      <footer className="border-t border-[#1a1a1a] px-4 sm:px-10 py-12">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 cs2-mono text-xs text-[#555]">
           <div>{dict.site_name} · {t.footer_built}</div>
           <div>{t.footer_copy}</div>

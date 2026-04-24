@@ -45,10 +45,10 @@ export default function CalloutsHubClient({ lang, dict }: { lang: Lang; dict: Di
         dict={{ back: dict.back, audio_on: dict.audio_on, audio_off: dict.audio_off, site_name: dict.site_name, hud_version: dict.hud_version }}
       />
 
-      <section className="relative pt-24 pb-8 px-6 sm:px-10">
+      <section className="relative pt-24 pb-8 px-4 sm:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-reveal cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">// 05 · CONNECTOR</div>
-          <h1 className="cs2-display mt-2 text-5xl sm:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
+          <h1 className="cs2-display mt-2 text-4xl sm:text-5xl md:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
             MAP <span className="text-[#F5A623]">ARSENAL</span>
           </h1>
           <p className="cs2-reveal cs2-mono text-base sm:text-lg max-w-2xl mt-4 text-[#aaa]" style={{ animationDelay: "0.15s" }}>
@@ -61,7 +61,7 @@ export default function CalloutsHubClient({ lang, dict }: { lang: Lang; dict: Di
         </div>
       </section>
 
-      <section className="px-6 sm:px-10 pb-20">
+      <section className="px-4 sm:px-10 pb-20">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {MAPS.map((m, i) => {
             const isLive = m.status === "live";
@@ -149,7 +149,7 @@ export default function CalloutsHubClient({ lang, dict }: { lang: Lang; dict: Di
         </div>
       </section>
 
-      <section className="px-6 sm:px-10 pb-20">
+      <section className="px-4 sm:px-10 pb-20">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-mono text-xs tracking-[0.4em] mb-4 text-[#666]">// STATUS</div>
           <div className="cs2-mono text-sm leading-relaxed max-w-2xl text-[#888]">
@@ -170,7 +170,7 @@ export default function CalloutsHubClient({ lang, dict }: { lang: Lang; dict: Di
         </div>
       </section>
 
-      <footer className="border-t border-[#1a1a1a] px-6 sm:px-10 py-8">
+      <footer className="border-t border-[#1a1a1a] px-4 sm:px-10 py-8">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 cs2-mono text-xs text-[#555]">
           <div>{dict.site_name} · CALLOUTS · HUB</div>
           <div>seven maps · three languages · one playbook</div>

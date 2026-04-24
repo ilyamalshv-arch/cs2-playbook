@@ -136,7 +136,7 @@ export default function TiltClient({ lang, dict }: { lang: Lang; dict: Dict }) {
       />
 
       {phase === "landing" && (
-        <section className="relative pt-24 pb-20 px-6 sm:px-10">
+        <section className="relative pt-24 pb-20 px-4 sm:px-10">
           <div className="max-w-4xl mx-auto">
             <div className="cs2-reveal cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">{t.section}</div>
             <h1 className="cs2-display mt-2 leading-[0.9]" style={{ fontSize: "clamp(56px, 10vw, 130px)" }}>
@@ -170,7 +170,7 @@ export default function TiltClient({ lang, dict }: { lang: Lang; dict: Dict }) {
       )}
 
       {phase === "intro" && (
-        <section className="relative pt-24 pb-20 px-6 sm:px-10 min-h-screen">
+        <section className="relative pt-24 pb-20 px-4 sm:px-10 min-h-screen">
           <div className="max-w-3xl mx-auto">
             <div className="flex justify-center mb-8">
               <svg width="80" height="140" viewBox="0 0 80 140" className="cs2-light">
@@ -200,7 +200,7 @@ export default function TiltClient({ lang, dict }: { lang: Lang; dict: Dict }) {
       )}
 
       {phase === "quiz" && (
-        <section className="relative pt-24 pb-20 px-6 sm:px-10">
+        <section className="relative pt-24 pb-20 px-4 sm:px-10">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-2 mb-6">
               <div className="cs2-mono text-xs tracking-widest text-[#666]">{t.q_of} {String(qIdx + 1).padStart(2, "0")} / {String(questions.length).padStart(2, "0")}</div>
@@ -244,7 +244,7 @@ export default function TiltClient({ lang, dict }: { lang: Lang; dict: Dict }) {
       )}
 
       {phase === "results" && diagnosis && (
-        <section className="relative pt-24 pb-20 px-6 sm:px-10">
+        <section className="relative pt-24 pb-20 px-4 sm:px-10">
           <div className="max-w-4xl mx-auto">
             <div className="cs2-popin" style={{ background: "#060606", border: `2px solid ${diagnosis.color}`, padding: "32px 32px" }}>
               <div className="cs2-mono text-xs tracking-[0.4em]" style={{ color: diagnosis.color }}>▸ {t.verdict}</div>
@@ -306,7 +306,7 @@ export default function TiltClient({ lang, dict }: { lang: Lang; dict: Dict }) {
         </section>
       )}
 
-      <footer className="border-t border-[#1a1a1a] px-6 sm:px-10 py-8 mt-auto">
+      <footer className="border-t border-[#1a1a1a] px-4 sm:px-10 py-8 mt-auto">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 cs2-mono text-xs text-[#555]">
           <div>{dict.site_name} · MENTAL · TILT TEST</div>
           <div>if this is weekly — talk to someone who doesn't play CS</div>

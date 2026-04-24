@@ -81,10 +81,10 @@ export default function TrainingClient({ lang, dict }: { lang: Lang; dict: Dict 
         dict={{ back: dict.back, audio_on: dict.audio_on, audio_off: dict.audio_off, site_name: dict.site_name, hud_version: dict.hud_version }}
       />
 
-      <section className="pt-24 pb-8 px-6 sm:px-10">
+      <section className="pt-24 pb-8 px-4 sm:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-reveal cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">// 03 · T SPAWN · 90-DAY PLAN</div>
-          <h1 className="cs2-display mt-2 text-5xl sm:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
+          <h1 className="cs2-display mt-2 text-4xl sm:text-5xl md:text-7xl text-white" style={{ letterSpacing: "0.01em" }}>
             BATTLE <span className="text-[#F5A623]">PASS</span>
           </h1>
           <p className="cs2-reveal cs2-mono text-base sm:text-lg max-w-2xl mt-4 text-[#aaa]" style={{ animationDelay: "0.15s" }}>
@@ -94,7 +94,7 @@ export default function TrainingClient({ lang, dict }: { lang: Lang; dict: Dict 
       </section>
 
       {/* STATS BAR */}
-      <section className="px-6 sm:px-10 mb-6">
+      <section className="px-4 sm:px-10 mb-6">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-4 gap-3">
           <StatBox label="DAYS DONE" value={`${completedCount}/90`} color="#F5A623" />
           <StatBox label="TOTAL XP" value={totalXp.toLocaleString()} color="#F5A623" />
@@ -104,7 +104,7 @@ export default function TrainingClient({ lang, dict }: { lang: Lang; dict: Dict 
       </section>
 
       {/* STAGE TRACK */}
-      <section className="px-6 sm:px-10 mb-6">
+      <section className="px-4 sm:px-10 mb-6">
         <div className="max-w-6xl mx-auto">
           <div className="cs2-mono text-[10px] tracking-[0.4em] mb-3 text-[#666]">▸ PROGRESSION · UNLOCKABLE REWARDS</div>
           <div className="grid sm:grid-cols-3 gap-3">
@@ -144,7 +144,7 @@ export default function TrainingClient({ lang, dict }: { lang: Lang; dict: Dict 
       </section>
 
       {/* FILTER + RESET */}
-      <section className="px-6 sm:px-10 mb-6">
+      <section className="px-4 sm:px-10 mb-6">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center gap-2">
           <div className="cs2-mono text-[10px] tracking-[0.4em] mr-2 text-[#666]">▸ FILTER</div>
           <FilterPill label="ALL 90 DAYS" active={filter === 0} onClick={() => setFilter(0)} color="#F5A623" />
@@ -152,7 +152,7 @@ export default function TrainingClient({ lang, dict }: { lang: Lang; dict: Dict 
             <FilterPill key={s.num} label={`STAGE ${s.num}`} active={filter === s.num} onClick={() => setFilter(s.num as any)} color={s.color} />
           ))}
           <button onClick={resetAll}
-            className="ml-auto cs2-mono text-[10px] tracking-widest px-3 py-1.5 hover:text-white transition-colors flex items-center gap-1 text-[#888]"
+            className="ml-auto cs2-mono text-[10px] tracking-widest px-3 py-2 hover:text-white transition-colors flex items-center gap-1 text-[#888]"
             style={{ border: "1px solid #333" }}>
             <RotateCcw size={11} /> RESET
           </button>
@@ -160,7 +160,7 @@ export default function TrainingClient({ lang, dict }: { lang: Lang; dict: Dict 
       </section>
 
       {/* DAYS GRID */}
-      <section className="px-6 sm:px-10 pb-20">
+      <section className="px-4 sm:px-10 pb-20">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {filtered.map((day) => {
             const stage = STAGES[day.stage - 1];
@@ -200,8 +200,8 @@ export default function TrainingClient({ lang, dict }: { lang: Lang; dict: Dict 
                       const key = `${day.day}-${i}`;
                       const isDone = !!progress.taskStates[key];
                       return (
-                        <label key={i} className="flex items-start gap-2 py-1.5 cursor-pointer group">
-                          <div className="mt-0.5 flex-shrink-0 w-4 h-4 flex items-center justify-center"
+                        <label key={i} className="flex items-start gap-3 py-2.5 sm:py-1.5 cursor-pointer group">
+                          <div className="mt-0.5 flex-shrink-0 w-5 h-5 flex items-center justify-center"
                             style={{
                               background: isDone ? stage.color : "transparent",
                               border: `1px solid ${isDone ? stage.color : "#444"}`,
@@ -224,7 +224,7 @@ export default function TrainingClient({ lang, dict }: { lang: Lang; dict: Dict 
         </div>
       </section>
 
-      <footer className="border-t border-[#1a1a1a] px-6 sm:px-10 py-8">
+      <footer className="border-t border-[#1a1a1a] px-4 sm:px-10 py-8">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 cs2-mono text-xs text-[#555]">
           <div>{dict.site_name} · TRAINING · 90-DAY PLAN</div>
           <div className="flex items-center gap-2">
@@ -249,7 +249,7 @@ function StatBox({ label, value, color }: { label: string; value: string; color:
 function FilterPill({ label, active, onClick, color }: { label: string; active: boolean; onClick: () => void; color: string }) {
   return (
     <button onClick={onClick}
-      className="cs2-mono text-[10px] tracking-widest px-3 py-1.5 transition-all"
+      className="cs2-mono text-[10px] tracking-widest px-3 py-2 transition-all"
       style={{
         background: active ? color : "transparent",
         color: active ? "#0a0a0a" : color,

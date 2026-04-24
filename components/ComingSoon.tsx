@@ -17,10 +17,10 @@ export function ComingSoon({
         title={title.toUpperCase()}
         dict={{ back: dict.back, audio_on: dict.audio_on, audio_off: dict.audio_off, site_name: dict.site_name, hud_version: dict.hud_version }}
       />
-      <section className="pt-32 pb-20 px-6 sm:px-10">
+      <section className="pt-32 pb-20 px-4 sm:px-10">
         <div className="max-w-4xl mx-auto">
           <div className="cs2-reveal cs2-mono text-xs tracking-[0.4em] text-[#F5A623]">{tag}</div>
-          <h1 className="cs2-display mt-2 text-5xl sm:text-7xl text-white">{title}</h1>
+          <h1 className="cs2-display mt-2 text-4xl sm:text-5xl md:text-7xl text-white">{title}</h1>
           <div className="cs2-reveal cs2-mono text-lg mt-6 text-[#888]" style={{ animationDelay: "0.15s" }}>{blurb}</div>
 
           <div className="cs2-reveal mt-12 p-8" style={{ background: "#060606", border: "1px dashed #F5A623", animationDelay: "0.3s" }}>
